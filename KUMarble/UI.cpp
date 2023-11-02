@@ -257,6 +257,7 @@ void RenderEQChoice() {
 }
 
 void RenderChoiceNum(int x) {
+	eraseInfoWindow(6);
 	gotoxy(33, 5);
 	cout << "¡ã";
 	gotoxy(33, 6);
@@ -318,37 +319,46 @@ void RenderAct(int map) {
 	//5 È¦Â¦
 	//6 ÄÚÀÎ ¾ò±â
 	//7 ÄÚÀÎ ÀÒ±â
+	eraseInfoWindow(2);
 	if (map == 0) {
 		gotoxy(26, 2);
 		cout << "¾ÕÀ¸·Î 3Ä­";
+		Sleep(1000);
 	}
 	else if (map == 1) {
 		gotoxy(26, 2);
 		cout << "µÚ·Î 3Ä­";
+		Sleep(1000);
 	}
 	else if (map == 2) {
 		gotoxy(26, 2);
 		cout << "»óÁ¡ Å¸ÀÏ";
+		Sleep(1000);
 	}
 	else if (map == 3) {
 		gotoxy(26, 2);
 		cout << "°¡À§¹ÙÀ§º¸";
+		Sleep(1000);
 	}
 	else if (map == 4) {
 		gotoxy(29, 2);
 		cout << "¾÷´Ù¿î";
+		Sleep(1000);
 	}
 	else if (map == 5) {
 		gotoxy(28, 2);
 		cout << "È¦Â¦";
+		Sleep(1000);
 	}
 	else if (map == 6) {
 		gotoxy(26, 2);
 		cout << "ÄÚÀÎ ¾ò±â";
+		Sleep(1000);
 	}
 	else if (map == 7) {
 		gotoxy(26, 2);
 		cout << "ÄÚÀÎ ÀÒ±â";
+		Sleep(1000);
 	}
 }
 

@@ -7,6 +7,5 @@ int main() {
 	srand((unsigned int)time(NULL));
 	printFrame();
 	play();
-	//test
 	return 0;
 }

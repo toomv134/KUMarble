@@ -10,14 +10,15 @@ vector<Player> player;
 //5 홀짝
 //6 코인 얻기
 //7 코인 잃기
-int map[27] = {
-	3,7,4,0,3,
-	7,6,0,1,7,
-	2,4,7,1,6,
-	6,5,4,7,0,
-	2,3,5,6,1,
-	6,5
-}; // 파일 입출력으로 수정
+int map[27];
+//int map[27] = {
+//	3,7,4,0,3,
+//	7,6,0,1,7,
+//	2,4,7,1,6,
+//	6,5,4,7,0,
+//	2,3,5,6,1,
+//	6,5
+//}; // 파일 입출력으로 수정
 
 int firstshop, secondshop;
 bool somebodywin = false;
@@ -47,7 +48,7 @@ void play()
 	}
 
 	//초반 세팅
-	RenderPlayersState(player);
+	//RenderPlayersState(player);
 
 	// 게임 시작
 
@@ -266,28 +267,28 @@ int updowncursorControl(int min, int max) {
 
 void checkTile(int playerNum) {
 	//cout<<"position: "<<player[playerNum].getNowPosition()<<"\n";
-	if (player[playerNum].getNowPosition() >= 26)return;
 	int pos = player[playerNum].getNowPosition();
+	if (pos >= 26)return;
 	if (map[pos] == 0) { //앞으로 3칸
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(3);
 		checkTile(playerNum);
 	}
 	else if (map[pos] == 1) { //뒤로 3칸
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(-3);
 		checkTile(playerNum);
 	}
 	else if (map[pos] == 2) { //상점
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(map[pos]);
 		shopping(playerNum);
 	}
 	else if (map[pos] == 6) {
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(map[pos]);
 		player[playerNum].setCoin(3);
 	}
 	else if (map[pos] == 7) {
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(map[pos]);
 		player[playerNum].setCoin(-3);
 	}
 	else {
@@ -335,7 +336,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 
 	int n;
 	if (typeOfGame == 3) { //가위바위보	
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(typeOfGame);
 		n = select(playerNum, 6);
 		int winner = checkRSP(playerNum, n);
 		if (winner == n) { //졌음
@@ -359,7 +360,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 		}
 	}
 	else if (typeOfGame == 4) { //업다운
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(typeOfGame);
 		n = select(playerNum, 6);
 		int tk = checkUpDown(playerNum, n) * 3; //2 1 0 -1
 		player[playerNum].setCoin(tk);
@@ -367,7 +368,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 
 	}
 	else if (typeOfGame == 5) { //홀짝
-		RenderAct(player[playerNum].getNowPosition());
+		RenderAct(typeOfGame);
 		n = select(playerNum, 6);
 		int tk = checkEQ(playerNum, n - 1); //5 -5
 		player[playerNum].setCoin(tk);
