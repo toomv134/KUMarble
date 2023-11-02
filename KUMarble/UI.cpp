@@ -335,7 +335,7 @@ void RenderAct(int map) {
 		cout << "가위바위보";
 	}
 	else if (map == 4) {
-		gotoxy(27, 2);
+		gotoxy(29, 2);
 		cout << "업다운";
 	}
 	else if (map == 5) {

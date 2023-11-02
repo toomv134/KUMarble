@@ -68,7 +68,7 @@ void play()
 			//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
 			cout << "Dice : " << vod << endl;
 			Sleep(1000);
-			eraseInfoWindow(1);
+			eraseInfoWindow(8);
 			if (player[i].getItemEffect() != 0) {
 				gotoxy(26, 9);
 				cout << "아이템 효과 : " << player[i].getItemEffect();
@@ -269,30 +269,25 @@ void checkTile(int playerNum) {
 	if (player[playerNum].getNowPosition() >= 26)return;
 	int pos = player[playerNum].getNowPosition();
 	if (map[pos] == 0) { //앞으로 3칸
-		gotoxy(26, 8);
-		cout << "앞으로 3칸";
+		RenderAct(player[playerNum].getNowPosition());
 		player[playerNum].setNowPosition(3);
 		checkTile(playerNum);
 	}
 	else if (map[pos] == 1) { //뒤로 3칸
-		gotoxy(26, 8);
-		cout << "뒤로 3칸";
+		RenderAct(player[playerNum].getNowPosition());
 		player[playerNum].setNowPosition(-3);
 		checkTile(playerNum);
 	}
 	else if (map[pos] == 2) { //상점
-		gotoxy(26, 8);
-		cout << "상점";
+		RenderAct(player[playerNum].getNowPosition());
 		shopping(playerNum);
 	}
 	else if (map[pos] == 6) {
-		gotoxy(26, 8);
-		cout << "코인 얻기";
+		RenderAct(player[playerNum].getNowPosition());
 		player[playerNum].setCoin(3);
 	}
 	else if (map[pos] == 7) {
-		gotoxy(26, 8);
-		cout << "코인 잃기";
+		RenderAct(player[playerNum].getNowPosition());
 		player[playerNum].setCoin(-3);
 	}
 	else {
@@ -473,120 +468,6 @@ void readMap()
 //7: 가위바위보 정하기
 //8: 업다운 정하기
 //9: 홀짝 정하기
-
-// int testSelect(int playerNum, int k)
-// {
-// 	if (k == 0) { //0: 게임 시작
-// 		cout << "1. start" << endl;
-// 		cout << "2. end" << endl;
-// 		cout << "=> ";
-// 	}
-// 	else if (k == 1) { //1: 플레이어 수 정하기
-// 		cout << "number of players => ";
-// 	}
-// 	else if (k == 2) { //2: 주사위 종류 정하기
-// 		cout << "player" << playerNum + 1 << " choice your dice\n1.일반주사위\n2.안전주사위\n3.고수주사위\n=>";
-// 		int n; cin >> n;
-// 		return n;
-// 	}
-// 	else if (k == 3) { //3: 주사위,아이템 결정
-// 		int n;
-// 		cout<<"1. 아이템 사용 \n2. 주사위 돌리기\n";
-// 		std::cin>>n;
-// 		if(n==1) //아이템쓸거에요
-// 			return 1;
-// 		else //안씀 
-// 			return 0;
-// 	}
-// 	else if (k == 4) { //4: 무슨 아이템쓸건지 0, 1
-// 		//가지고 있는 아이템 보여주기
-// 		//아이템 골랐어
-// 		cout << "player" << playerNum+1 << " items" << endl;
-// 		string itemNo1; string itemNo2;
-// 		if (player[playerNum].getItem(0) == 0) itemNo1 = "비어있음";
-// 		else if (player[playerNum].getItem(0) == 1) itemNo1 = "가보자";
-// 		else if (player[playerNum].getItem(0) == 2) itemNo1 = "꼼짝마";
-// 		else if (player[playerNum].getItem(0) == 3) itemNo1 = "시크릿 쥬쥬";
-
-// 		if (player[playerNum].getItem(1) == 0) itemNo2 = "비어있음";
-// 		else if (player[playerNum].getItem(1) == 1) itemNo2 = "가보자";
-// 		else if (player[playerNum].getItem(1) == 2) itemNo2 = "꼼짝마";
-// 		else if (player[playerNum].getItem(1) == 3) itemNo2 = "시크릿 쥬쥬";
-
-// 		cout << "1. " << itemNo1 << endl;
-// 		cout << "2. " << itemNo2 << endl;
-// 		cout << "3. 나가기" << endl;
-// 		cout << "=>";
-
-// 		int n;
-// 		std::cin>>n;
-// 		if(n == 3){
-// 			return 0;
-// 		}
-// 		else{
-// 			if(player[playerNum].getItem(n - 1) == 1) { //0 없음 1가보자 2 꼼짝마 3 주주 getItem(int x) x->몇번째 아이템
-// 				return 3 ;
-// 			}
-// 			else if(player[playerNum].getItem(n - 1) == 2){ //꼼짝마
-// 				//사실 나중에 이 선택은 시발 select(10)에서 진행 예정 섹스!
-// 				int pnum;
-// 				std::cin>>pnum; //pnum = 몇번째 플레이어에게 꼼짝마를 먹일건지 
-// 				return testSelect(pnum,10);
-// 			}
-// 			else if(player[playerNum].getItem(n - 1) == 3 ){//주주
-// 				return 1;
-// 			}
-// 			else{ //없음
-// 				return 0;
-// 			}
-// 		}
-// 	}
-// 	else if (k == 5) { //5: 상점에서 무슨 아이템 구매할건지
-// 		cout << "1. 가보자" << endl;
-// 		cout << "2. 꼼짝마" << endl;
-// 		cout << "3. 주사위주사위" << endl;
-// 		cout << "4. 나가기" << endl;
-// 		int n ; cin>>n;
-// 		return n;
-// 	}
-// 	else if (k == 6) { //6: 어느 플레이어와 게임할지
-// 		int numberOfPlayer = player.size();
-// 		for(int i=0;i<4;i++){
-// 			if(playerNum == i + 1)
-// 				continue;
-// 			cout<<i<<"번 플레이어\n";
-// 		}
-// 	}
-// 	else if (k == 7) { //7: 가위바위보 정하기
-// 		cout << "1. 가위" << endl;
-// 		cout << "2. 바위" << endl;
-// 		cout << "3. 보" << endl;
-// 	}
-// 	else if (k == 8) { //8: 업다운 정하기
-// 		cout << "1" << endl;
-// 		cout << "2" << endl;
-// 		cout << "3" << endl;
-// 		cout << "4" << endl;
-// 		cout << "5" << endl;
-// 		cout << "6" << endl;
-// 		cout << "7" << endl;
-// 		cout << "8" << endl;
-// 		cout << "9" << endl;
-// 		cout << "10" << endl;
-// 	}
-// 	else if (k == 9) { //9: 홀짝 정하기
-// 		cout << "1. 홀" << endl;
-// 		cout << "2. 짝" << endl;
-// 	}
-// 	else if (k==10){
-// 		player[playerNum].setItemEffect(-3);
-// 		return 0;
-// 	}
-
-// 	int n;
-// 	std::cin >> n;
-// 	return n;
-// }
 
 int rollDice(int playerNum) {
 	srand((unsigned int)time(NULL));
