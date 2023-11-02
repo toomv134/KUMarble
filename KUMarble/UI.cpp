@@ -6,9 +6,6 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), posXY);
 }
 
-/*¦¡	¦¢	¦£	¦¤	¦¥	¦¦	¦§	¦¨	¦©	¦ª	¦«	¦¬	¦­	¦®	¦¯	¦°	¦±	¦²	¦³	¦´	¦µ	¦¶	¦·	¦¸	¦¹	¦º	¦»
-¦¼	¦½	¦¾	¦¿	¦À	¦Á	¦Â	¦Ã	¦Ä	¦Å	¦Æ	¦Ç	¦È	¦É	¦Ê	¦Ë	¦Ì	¦Í	¦Î	¦Ï	¦Ð	¦Ñ	¦Ò	¦Ó	¦Ô	¦Õ	¦Ö
-¦×	¦Ø	¦Ù	¦Ú	¦Û	¦Ü	¦Ý	¦Þ	¦ß	¦à	¦á	¦â	¦ã	¦ä*/
 
 void printFrame()
 {
