@@ -31,70 +31,74 @@ void play()
 
 	firstshop = 10;
 	secondshop = 20;
-
-	if (select(0, 0) == 2) {//게임 플레이,종료 결정
-		return;
-	}
-
-	numberOfPlayer = select(0, 1);//플레이어 수 결정
-
-	for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
-		Player p(i);
-		player.push_back(p);
-	}
-
-	for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
-		player[i].setDice(select(i, 2) - 1);
-	}
-
-	//초반 세팅
-	//RenderPlayersState(player);
-
-	// 게임 시작
-
-	while (!somebodywin) { //누군가 이길때까지
-		int vod = 0; //value of dice
-		//게임씬나오고
-		// 얘네 플레이 하는 명수에 따라 포문 설정해주기
-		for (int i = 0; i < numberOfPlayer; i++) {
-			RenderPlayersState(player); //플레이어들 정보 갱신 
-			int ifUseItem = select(i, 3);
-			//누구누구차례 y=1 erase, render
-			//지금 뭐하는지 y=2 erase,render 
-			if (ifUseItem == 1) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
-				player[i].setItemEffect(useItem(i, select(i, 4))); //아이템 이펙트 바뀜 select4 return 0 : 나가기,아이템 없음  1 : 주사위주사위 3 : 가보자
-			}
-			vod = rollDice(i);
-			gotoxy(29, 8);
-			//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
-			cout << "Dice : " << vod << endl;
-			Sleep(1000);
-			eraseInfoWindow(8);
-			if (player[i].getItemEffect() != 0) {
-				gotoxy(26, 9);
-				cout << "아이템 효과 : " << player[i].getItemEffect();
-				vod += player[i].getItemEffect();
-				player[i].resetItemEffect();
-			}
-
-			player[i].setNowPosition(vod);// 이동
-			ErasePlayersState(player);
-			RenderPlayersState(player); //이동하고 정보 갱신 
-
-			checkTile(i);
-			// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
-			Sleep(1000);
-
-
-			checkShop(i);
-
-			ErasePlayersState(player);
-			EraseChoiceScene();
-			if (checkWin(i)) break; //마지막 타일 도착했는지 판별하고 다음 사람
+	while (1) {
+		system("cls");
+		printMiniFrame();
+		if (select(0, 0) == 2) {//게임 플레이,종료 결정
+			return;
 		}
 
+		numberOfPlayer = select(0, 1);//플레이어 수 결정
+
+		for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
+			Player p(i);
+			player.push_back(p);
+		}
+		system("cls");
+		printFrame();
+		for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
+			player[i].setDice(select(i, 2) - 1);
+		}
+
+		//초반 세팅
+		//RenderPlayersState(player);
+
+		// 게임 시작
+
+		while (!somebodywin) { //누군가 이길때까지
+			int vod = 0; //value of dice
+			//게임씬나오고
+			// 얘네 플레이 하는 명수에 따라 포문 설정해주기
+			for (int i = 0; i < numberOfPlayer; i++) {
+				RenderPlayersState(player); //플레이어들 정보 갱신 
+				int ifUseItem = select(i, 3);
+				//누구누구차례 y=1 erase, render
+				//지금 뭐하는지 y=2 erase,render 
+				if (ifUseItem == 1) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
+					player[i].setItemEffect(useItem(i, select(i, 4))); //아이템 이펙트 바뀜 select4 return 0 : 나가기,아이템 없음  1 : 주사위주사위 3 : 가보자
+				}
+				vod = rollDice(i);
+				gotoxy(29, 8);
+				//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
+				cout << "Dice : " << vod << endl;
+				Sleep(1000);
+				eraseInfoWindow(8);
+				if (player[i].getItemEffect() != 0) {
+					gotoxy(26, 9);
+					cout << "아이템 효과 : " << player[i].getItemEffect();
+					vod += player[i].getItemEffect();
+					player[i].resetItemEffect();
+				}
+
+				player[i].setNowPosition(vod);// 이동
+				ErasePlayersState(player);
+				RenderPlayersState(player); //이동하고 정보 갱신 
+
+				checkTile(i);
+				// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
+				Sleep(1000);
+
+
+				checkShop(i);
+
+				ErasePlayersState(player);
+				EraseChoiceScene();
+				if (checkWin(i)) break; //마지막 타일 도착했는지 판별하고 다음 사람
+			}
+
+		}
+		//cout<<"game over \n";
 	}
-	//cout<<"game over \n";
 }
 
 bool checkWin(int playerNum) {

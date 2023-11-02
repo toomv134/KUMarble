@@ -268,7 +268,7 @@ void RenderChoiceNum(int x) {
 
 void RenderChoicePlayerNumTitle()
 {
-	gotoxy(23, 1);
+	gotoxy(23, 4);
 	cout << "<플레이할 인원 수 선택>";
 }
 
@@ -372,6 +372,25 @@ void eraseInfoWindow(int i)
 	gotoxy(22, i);
 	for (int j = 0; j < 24; j++)cout << " ";
 
+}
+void printMiniFrame()
+{
+	gotoxy(21, 2);
+	cout << "┌─────────────────────────┐";
+	gotoxy(21, 3);
+	cout << "│                         │";
+	gotoxy(21, 4);
+	cout << "│                         │";
+	gotoxy(21, 5);
+	cout << "│                         │";
+	gotoxy(21, 6);
+	cout << "│                         │";
+	gotoxy(21, 7);
+	cout << "│                         │";
+	gotoxy(21, 8);
+	cout << "│                         │";
+	gotoxy(21, 9);
+	cout << "└─────────────────────────┘";
 }
 /*
 커서컨트롤 사촌(int max, int min){

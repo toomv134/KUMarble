@@ -37,3 +37,4 @@ void ErasePlayersState(vector<Player> player);
 void RenderAct(int map);
 void EraseAct(int map);
 void eraseInfoWindow(int i);
+void printMiniFrame();
