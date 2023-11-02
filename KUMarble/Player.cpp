@@ -6,7 +6,7 @@ Player::Player(int x)
 {
 	num = x;
 	nowPosition = -1;
-	coin = 100;
+	coin = 3;
 	shopCnt = 0;
 	dice = 0;
 	item[0] = 0;

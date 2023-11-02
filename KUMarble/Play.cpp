@@ -66,9 +66,10 @@ void play()
 				//지금 뭐하는지 y=2 erase,render 
 				if (ifUseItem == 1) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
 					player[i].setItemEffect(useItem(i, select(i, 4))); //아이템 이펙트 바뀜 select4 return 0 : 나가기,아이템 없음  1 : 주사위주사위 3 : 가보자
+
 				}
 				vod = rollDice(i);
-				gotoxy(29, 8);
+				gotoxy(31, 8);
 				//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
 				cout << "Dice : " << vod << endl;
 				Sleep(1000);
@@ -93,7 +94,13 @@ void play()
 
 				ErasePlayersState(player);
 				EraseChoiceScene();
-				if (checkWin(i)) break; //마지막 타일 도착했는지 판별하고 다음 사람
+				if (checkWin(i)) {
+					system("cls");
+					gotoxy(26, 5);
+					cout << i + 1 << "Player WIN!!";
+					Sleep(1000);
+					break; //마지막 타일 도착했는지 판별하고 다음 사람
+				}
 			}
 
 		}
@@ -140,13 +147,16 @@ int select(int playerNum, int k)
 		}
 		else {
 			if (player[playerNum].getItem(n - 1) == 1) { //0 없음 1가보자 2 꼼짝마 3 주주 getItem(int x) x->몇번째 아이템
+				player[playerNum].setItem(n-1,0);
 				return 3;
 			}
 			else if (player[playerNum].getItem(n - 1) == 2) { //꼼짝마
 				//pnum = 몇번째 플레이어에게 꼼짝마를 먹일건지 
+				player[playerNum].setItem(n - 1, 0);
 				return select(select(playerNum, 6), 10);
 			}
 			else if (player[playerNum].getItem(n - 1) == 3) {//주주
+				player[playerNum].setItem(n - 1, 0);
 				return 1;
 			}
 			else { //없음
@@ -322,13 +332,13 @@ void shopping(int playerNum) {
 	if ((selectnum == 1 || selectnum == 2) && player[playerNum].getCoin() >= 3 && player[playerNum].isItemEmpty() != -1) {
 		player[playerNum].setCoin(-3);
 		player[playerNum].setItem(player[playerNum].isItemEmpty(), selectnum);
-		gotoxy(26, 8);
-		cout << selectnum << " 구매완료 \n";
+		gotoxy(28, 8);
+		cout<< " 구매완료 \n";
 	}
 	else if (selectnum == 3 && player[playerNum].getCoin() >= 5 && player[playerNum].isItemEmpty() != -1) {
 		player[playerNum].setCoin(-5);
 		player[playerNum].setItem(player[playerNum].isItemEmpty(), selectnum);
-		gotoxy(26, 8);
+		gotoxy(28, 8);
 		cout << "구매완료 \n";
 	}
 	else {
@@ -344,21 +354,21 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 		n = select(playerNum, 6);
 		int winner = checkRSP(playerNum, n);
 		if (winner == n) { //졌음
-			gotoxy(26, 9);
+			gotoxy(28, 9);
 			cout << "player" << n + 1 << " 승리" << endl;
 			Sleep(1000);
 			player[winner].setCoin(5);
 			player[playerNum].setCoin(-5);
 		}
 		else if (winner == playerNum) { //이겼음
-			gotoxy(26, 9);
+			gotoxy(28, 9);
 			cout << "player" << playerNum + 1 << " 승리" << endl;
 			Sleep(1000);
 			player[winner].setCoin(5);
 			player[n].setCoin(-5);
 		}
 		else { //비겼음
-			gotoxy(26, 9);
+			gotoxy(28, 9);
 			cout << "비김 수고링" << endl;
 			Sleep(1000);
 		}
@@ -383,30 +393,30 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 int checkUpDown(int playerNum, int otherNum) {
 	//상대방이 숫자 골라 1~10
 	gotoxy(26, 1);
-	cout << otherNum + 1 << "player choice";
+	cout << otherNum + 1 << " player choice";
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
 		gotoxy(26, 2);
-		cout << playerNum + 1 << "player choice";
+		cout << playerNum + 1 << " player choice";
 		x = select(playerNum, 8);
 		if (num == x) {
 			//std::cout<<i+1<<"트 win \n";
-			gotoxy(26, 8);
+			gotoxy(32, 8);
 			std::cout << "Correct!";
 			Sleep(1000);
 			return 2 - i;
 		}
 		else if (num > x) {
-			gotoxy(26, 8);
+			gotoxy(33, 8);
 			std::cout << "Up";
 		}
 		else {
-			gotoxy(26, 8);
+			gotoxy(32, 8);
 			std::cout << "Down";
 		}
 	}
-	gotoxy(26, 8);
+	gotoxy(28, 8);
 	std::cout << "못맞춤";
 	return -1;
 }
@@ -416,12 +426,12 @@ int checkEQ(int playerNum, int otherNum) {
 	int num = select(otherNum, 8); //1~10
 	int x = select(playerNum, 9); //1 2
 	if (num % 2 == x % 2) {
-		gotoxy(26, 8);
+		gotoxy(33, 8);
 		cout << "win ";
 		return 5;
 	}
 	else {
-		gotoxy(26, 8);
+		gotoxy(32, 8);
 		cout << "lose ";
 		return -5;
 	}

@@ -170,8 +170,7 @@ void RenderPlayerInfo(Player p) {
 	gotoxy(x, y + 2);
 	cout << "Pos : " << p.getNowPosition() + 1;
 	gotoxy(x, y + 3);
-	//	cout<<"Coin : "<<p.getCoin();
-	cout << "Effect : " << p.getItemEffect();
+	cout<<"Coin : "<<p.getCoin();
 }
 
 void RenderPlayerNumChoice(int x) {
@@ -188,9 +187,9 @@ void RenderDiceChoice() {
 }
 
 void RenderDiceItemChoice() {
-	gotoxy(26, 5);
+	gotoxy(28, 5);
 	cout << "아이템 사용";
-	gotoxy(26, 6);
+	gotoxy(28, 6);
 	cout << "주사위 사용";
 }
 
@@ -230,19 +229,19 @@ void RenderMinigamePlayerChoice(int numberOfPlayer, Player player) {
 	for (int i = 0; i < numberOfPlayer; i++) {
 		if (player.getNum() == i)
 			continue;
-		gotoxy(26, p);
+		gotoxy(28, p);
 		cout << i + 1 << "번 플레이어";
 		p++;
 	}
 }
 
 void RenderRSPChoice() {
-	gotoxy(26, 5);
+	gotoxy(33, 5);
 	cout << "가위";
-	gotoxy(26, 6);
+	gotoxy(33, 6);
 	cout << "바위";
-	gotoxy(26, 7);
-	cout << "보";
+	gotoxy(33, 7);
+	cout << " 보";
 }
 
 void RenderUpDownChoice(int x) {
@@ -250,9 +249,9 @@ void RenderUpDownChoice(int x) {
 }
 
 void RenderEQChoice() {
-	gotoxy(26, 5);
+	gotoxy(33, 5);
 	cout << "홀";
-	gotoxy(26, 6);
+	gotoxy(33, 6);
 	cout << "짝";
 }
 
@@ -321,42 +320,42 @@ void RenderAct(int map) {
 	//7 코인 잃기
 	eraseInfoWindow(2);
 	if (map == 0) {
-		gotoxy(26, 2);
+		gotoxy(30, 2);
 		cout << "앞으로 3칸";
 		Sleep(1000);
 	}
 	else if (map == 1) {
-		gotoxy(26, 2);
+		gotoxy(30, 2);
 		cout << "뒤로 3칸";
 		Sleep(1000);
 	}
 	else if (map == 2) {
-		gotoxy(26, 2);
+		gotoxy(30, 2);
 		cout << "상점 타일";
 		Sleep(1000);
 	}
 	else if (map == 3) {
-		gotoxy(26, 2);
+		gotoxy(29, 2);
 		cout << "가위바위보";
 		Sleep(1000);
 	}
 	else if (map == 4) {
-		gotoxy(29, 2);
+		gotoxy(32, 2);
 		cout << "업다운";
 		Sleep(1000);
 	}
 	else if (map == 5) {
-		gotoxy(28, 2);
+		gotoxy(33, 2);
 		cout << "홀짝";
 		Sleep(1000);
 	}
 	else if (map == 6) {
-		gotoxy(26, 2);
+		gotoxy(30, 2);
 		cout << "코인 얻기";
 		Sleep(1000);
 	}
 	else if (map == 7) {
-		gotoxy(26, 2);
+		gotoxy(30, 2);
 		cout << "코인 잃기";
 		Sleep(1000);
 	}
