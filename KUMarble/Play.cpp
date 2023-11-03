@@ -366,9 +366,9 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 			EraseChoiceScene();
 			gotoxy(28, 6);
 			cout << "player" << n + 1 << " 승리";
-			gotoxy(32, 7);
+			gotoxy(23, 7);
 			cout << "Player" << winner + 1 << " " <<"5 코인 획득! ";
-			gotoxy(32, 8);
+			gotoxy(23, 8);
 			cout << "Player" << playerNum + 1 << " " << "5 코인 압수 ! ";
 			Sleep(1000);
 			player[winner].setCoin(5);
@@ -378,9 +378,9 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 			EraseChoiceScene();
 			gotoxy(28, 6);
 			cout << "player" << n + 1 << " 승리";
-			gotoxy(32, 7);
+			gotoxy(23, 7);
 			cout << "Player" << winner + 1 << " " << "5 코인 획득! ";
-			gotoxy(32, 8);
+			gotoxy(23, 8);
 			cout << "Player" << n + 1 << " " << "5 코인 압수 ! ";
 			Sleep(1000);
 			player[winner].setCoin(5);
@@ -496,7 +496,11 @@ int checkEQ(int playerNum, int otherNum) {
 }
 
 int checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 바위 보 바위 가위  보 
+	gotoxy(28, 4);
+	cout << "Player" << playerNum + 1;
 	int pnum = RSP(playerNum);
+	gotoxy(28, 4);
+	cout << "Player" << otherNum + 1;
 	int onum = RSP(otherNum);
 	if ((pnum == 1 && onum == 2) || (pnum == 2 && onum == 3) || (pnum == 3 && onum == 1)) return otherNum; //진거
 	if ((pnum == 1 && onum == 3) || (pnum == 2 && onum == 1) || (pnum == 3 && onum == 2)) return playerNum;
