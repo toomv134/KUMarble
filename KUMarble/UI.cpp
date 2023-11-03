@@ -82,7 +82,7 @@ Render
 
 void EraseChoiceScene() {
 	for (int i = 1; i < 13; i++) {
-		gotoxy(23, i);
+		gotoxy(22, i);
 		cout << "                       ";
 	}
 
@@ -320,9 +320,8 @@ void RenderAct(int map) {
 	//5 È¦Â¦
 	//6 ÄÚÀÎ ¾ò±â
 	//7 ÄÚÀÎ ÀÒ±â
-	eraseInfoWindow(2);
 	if (map == 0) {
-		gotoxy(26, 6);
+		gotoxy(23, 6);
 		cout << "¾ÕÀ¸·Î ÀÌµ¿ Å¸ÀÏ µµÂø";
 		gotoxy(30, 7);
 		cout << "3Ä­ ÀüÁø !";
@@ -330,7 +329,7 @@ void RenderAct(int map) {
 		EraseChoiceScene();
 	}
 	else if (map == 1) {
-		gotoxy(26, 6);
+		gotoxy(23, 6);
 		cout << "µÚ·Î ÀÌµ¿ Å¸ÀÏ µµÂø";
 		gotoxy(30, 7);
 		cout << "3Ä­ ÈÄÁø !";
@@ -343,7 +342,7 @@ void RenderAct(int map) {
 		Sleep(1000);
 	}
 	else if (map == 3) {
-		gotoxy(26, 6);
+		gotoxy(23, 6);
 		cout << "¹Ì´Ï°ÔÀÓ Å¸ÀÏ µµÂø";
 		gotoxy(26, 7);
 		cout << "°¡À§¹ÙÀ§º¸ ½ÃÀÛ";
@@ -351,7 +350,7 @@ void RenderAct(int map) {
 		EraseChoiceScene();
 	}
 	else if (map == 4) {
-		gotoxy(26, 6);
+		gotoxy(23, 6);
 		cout << "¹Ì´Ï°ÔÀÓ Å¸ÀÏ µµÂø";
 		gotoxy(26, 7);
 		cout << "¾÷´Ù¿î ½ÃÀÛ";
@@ -359,7 +358,7 @@ void RenderAct(int map) {
 		EraseChoiceScene();
 	}
 	else if (map == 5) {
-		gotoxy(26, 6);
+		gotoxy(23, 6);
 		cout << "¹Ì´Ï°ÔÀÓ Å¸ÀÏ µµÂø";
 		gotoxy(26, 7);
 		cout << "È¦Â¦ ½ÃÀÛ";
@@ -367,17 +366,17 @@ void RenderAct(int map) {
 		EraseChoiceScene();
 	}
 	else if (map == 6) {
-		gotoxy(28, 2);
+		gotoxy(26, 6);
 		cout << "ÆÄ¶õ Å¸ÀÏ µµÂø";
-		gotoxy(28, 3);
+		gotoxy(28, 7);
 		cout << "ÄÚÀÎ 3 È¹µæ!";
 		Sleep(1000);
 		EraseChoiceScene();
 	}
 	else if (map == 7) {
-		gotoxy(28, 2);
+		gotoxy(26, 6);
 		cout << "»¡°£ Å¸ÀÏ µµÂø";
-		gotoxy(28, 3);
+		gotoxy(28, 7);
 		cout << "ÄÚÀÎ 3 »¯±è!";
 		Sleep(1000);
 		EraseChoiceScene();

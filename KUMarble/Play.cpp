@@ -97,9 +97,8 @@ void play()
 				ErasePlayersState(player);
 				EraseChoiceScene();
 				if (checkWin(i)) {
-					system("cls");
-					gotoxy(26, 5);
-					cout << i + 1 << "Player WIN!!";
+					gotoxy(26, 6);
+					cout << "Player" <<i + 1 << "Player 승리";
 					Sleep(1000);
 					break; //마지막 타일 도착했는지 판별하고 다음 사람
 				}
@@ -291,6 +290,9 @@ void checkTile(int playerNum) {
 	//cout<<"position: "<<player[playerNum].getNowPosition()<<"\n";
 	int pos = player[playerNum].getNowPosition();
 	if (pos >= 26)return;
+	EraseChoiceScene();
+	gotoxy(28, 4);
+	cout << "Player" << playerNum + 1;
 	if (map[pos] == 0) { //앞으로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(3);
@@ -412,8 +414,8 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 
 int checkUpDown(int playerNum, int otherNum) {
 	//상대방이 숫자 골라 1~10
-	gotoxy(26, 1);
-	cout << otherNum + 1 << " player choice";
+	gotoxy(26, 4);
+	cout <<"Player"<< otherNum + 1 << "숫자를 지정하세요";
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
@@ -438,12 +440,16 @@ int checkUpDown(int playerNum, int otherNum) {
 			return 2 - i;
 		}
 		else if (num > x) {
+			gotoxy(26, 5);
+			cout << playerNum + 1 << " player(Life:" << 2 - i << ")";
 			gotoxy(33, 8);
 			cout << "Up";
 			Sleep(1000);
 			eraseInfoWindow(8);
 		}
 		else {
+			gotoxy(26, 5);
+			cout << playerNum + 1 << " player(Life:" << 2 - i << ")";
 			gotoxy(32, 8);
 			cout << "Down";
 			Sleep(1000);
@@ -555,8 +561,8 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 바위 보
 		cout << "Player" << otherNum + 1 << " " << oc;
 		gotoxy(26, 6);
 		cout << "가위바위보 무승부";
-		gotoxy(23, 7);
-		cout << "아무일도 일어나지 않았다";
+		gotoxy(26, 7);
+		cout << "아무일도 없었다";
 		Sleep(1000);
 	}
 }
