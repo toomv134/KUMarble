@@ -166,11 +166,11 @@ void RenderPlayerInfo(Player p) {
 	gotoxy(x, y);
 	cout << "Player" << num + 1;
 	gotoxy(x, y + 1);
-	cout << "주사위 종류 : " << dice;
+	cout << "Coin : " << p.getCoin();
 	gotoxy(x, y + 2);
-	cout << "Pos : " << p.getNowPosition() + 1;
+	cout << "now : " << p.getNowPosition() + 1;
 	gotoxy(x, y + 3);
-	cout<<"Coin : "<<p.getCoin();
+	cout << "to Goal : " << 26 - (p.getNowPosition() + 1);
 }
 
 void RenderPlayerNumChoice(int x) {
@@ -188,9 +188,9 @@ void RenderDiceChoice() {
 
 void RenderDiceItemChoice() {
 	gotoxy(28, 5);
-	cout << "아이템 사용";
-	gotoxy(28, 6);
 	cout << "주사위 사용";
+	gotoxy(28, 6);
+	cout << "아이템 사용";
 }
 
 void RenderUseItemChoice(Player player) {
@@ -199,12 +199,12 @@ void RenderUseItemChoice(Player player) {
 	if (player.getItem(0) == 0) itemNo1 = "비어있음";
 	else if (player.getItem(0) == 1) itemNo1 = "가보자";
 	else if (player.getItem(0) == 2) itemNo1 = "꼼짝마";
-	else if (player.getItem(0) == 3) itemNo1 = "시크릿 쥬쥬";
+	else if (player.getItem(0) == 3) itemNo1 = "주사위주사위";
 
 	if (player.getItem(1) == 0) itemNo2 = "비어있음";
 	else if (player.getItem(1) == 1) itemNo2 = "가보자";
 	else if (player.getItem(1) == 2) itemNo2 = "꼼짝마";
-	else if (player.getItem(1) == 3) itemNo2 = "시크릿 쥬쥬";
+	else if (player.getItem(1) == 3) itemNo2 = "주사위주사위";
 	gotoxy(26, 5);
 	cout << "1. " << itemNo1;
 	gotoxy(26, 6);
@@ -215,17 +215,19 @@ void RenderUseItemChoice(Player player) {
 
 void RenderBuyItemChoice() {
 	gotoxy(26, 5);
-	cout << "1. 가보자";
+	cout << "1. 가보자(3C)";
 	gotoxy(26, 6);
-	cout << "2. 꼼짝마";
+	cout << "2. 꼼짝마(3C)";
 	gotoxy(26, 7);
-	cout << "3. 주사위주사위";
+	cout << "3. 주사위주사위(5C)";
 	gotoxy(26, 8);
 	cout << "4. 나가기";
 }
 
 void RenderMinigamePlayerChoice(int numberOfPlayer, Player player) {
 	int p = 5;
+	gotoxy(26, 4);
+	cout << "플레이어 한명 지정";
 	for (int i = 0; i < numberOfPlayer; i++) {
 		if (player.getNum() == i)
 			continue;
@@ -323,11 +325,13 @@ void RenderAct(int map) {
 		gotoxy(30, 2);
 		cout << "앞으로 3칸";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 	else if (map == 1) {
 		gotoxy(30, 2);
 		cout << "뒤로 3칸";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 	else if (map == 2) {
 		gotoxy(30, 2);
@@ -335,29 +339,44 @@ void RenderAct(int map) {
 		Sleep(1000);
 	}
 	else if (map == 3) {
-		gotoxy(29, 2);
-		cout << "가위바위보";
+		gotoxy(26, 6);
+		cout << "미니게임 타일 도착";
+		gotoxy(26, 7);
+		cout << "가위바위보 시작";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 	else if (map == 4) {
-		gotoxy(32, 2);
-		cout << "업다운";
+		gotoxy(26, 6);
+		cout << "미니게임 타일 도착";
+		gotoxy(26, 7);
+		cout << "업다운 시작";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 	else if (map == 5) {
-		gotoxy(33, 2);
-		cout << "홀짝";
+		gotoxy(26, 6);
+		cout << "미니게임 타일 도착";
+		gotoxy(26, 7);
+		cout << "홀짝 시작";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 	else if (map == 6) {
-		gotoxy(30, 2);
-		cout << "코인 얻기";
+		gotoxy(28, 2);
+		cout << "파란 타일 도착";
+		gotoxy(28, 3);
+		cout << "코인 3 획득!";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 	else if (map == 7) {
-		gotoxy(30, 2);
-		cout << "코인 잃기";
+		gotoxy(28, 2);
+		cout << "빨간 타일 도착";
+		gotoxy(28, 3);
+		cout << "코인 3 뺏김!";
 		Sleep(1000);
+		EraseChoiceScene();
 	}
 }
 

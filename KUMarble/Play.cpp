@@ -47,6 +47,7 @@ void play()
 		}
 		system("cls");
 		printFrame();
+		RenderPlayersState(player); //플레이어들 정보 갱신 
 		for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
 			player[i].setDice(select(i, 2) - 1);
 		}
@@ -65,7 +66,7 @@ void play()
 				int ifUseItem = select(i, 3);
 				//누구누구차례 y=1 erase, render
 				//지금 뭐하는지 y=2 erase,render 
-				if (ifUseItem == 1) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
+				if (ifUseItem == 2) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
 					player[i].setItemEffect(useItem(i, select(i, 4))); //아이템 이펙트 바뀜 select4 return 0 : 나가기,아이템 없음  1 : 주사위주사위 3 : 가보자
 
 				}
@@ -90,7 +91,7 @@ void play()
 				// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
 				Sleep(1000);
 
-
+				EraseChoiceScene();
 				checkShop(i);
 
 				ErasePlayersState(player);
@@ -106,7 +107,12 @@ void play()
 
 		}
 		//cout<<"game over \n";
+		for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
+			Player p(i);
+			player.push_back(p);
+		}
 	}
+
 }
 
 bool checkWin(int playerNum) {
@@ -171,6 +177,7 @@ int select(int playerNum, int k)
 	}
 	else if (k == 6) { //6: 어느 플레이어와 게임할지 return : 상대방의 번호(벡터상의번호) 
 		RenderMinigamePlayerChoice(numberOfPlayer, player[playerNum]);
+
 		int n = cursorControl(numberOfPlayer - 1);
 		if (numberOfPlayer == 2) {
 			if (playerNum == 0)	return 1;
@@ -352,25 +359,37 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 	int n;
 	if (typeOfGame == 3) { //가위바위보	
 		RenderAct(typeOfGame);
+
 		n = select(playerNum, 6);
 		int winner = checkRSP(playerNum, n);
 		if (winner == n) { //졌음
-			gotoxy(28, 9);
-			cout << "player" << n + 1 << " 승리" << endl;
+			EraseChoiceScene();
+			gotoxy(28, 6);
+			cout << "player" << n + 1 << " 승리";
+			gotoxy(32, 7);
+			cout << "Player" << winner + 1 << " " <<"5 코인 획득! ";
+			gotoxy(32, 8);
+			cout << "Player" << playerNum + 1 << " " << "5 코인 압수 ! ";
 			Sleep(1000);
 			player[winner].setCoin(5);
 			player[playerNum].setCoin(-5);
 		}
 		else if (winner == playerNum) { //이겼음
-			gotoxy(28, 9);
-			cout << "player" << playerNum + 1 << " 승리" << endl;
+			EraseChoiceScene();
+			gotoxy(28, 6);
+			cout << "player" << n + 1 << " 승리";
+			gotoxy(32, 7);
+			cout << "Player" << winner + 1 << " " << "5 코인 획득! ";
+			gotoxy(32, 8);
+			cout << "Player" << n + 1 << " " << "5 코인 압수 ! ";
 			Sleep(1000);
 			player[winner].setCoin(5);
 			player[n].setCoin(-5);
 		}
 		else { //비겼음
-			gotoxy(28, 9);
-			cout << "비김 수고링" << endl;
+			EraseChoiceScene();
+			gotoxy(28, 6);
+			cout << "비겼습니다" << endl;
 			Sleep(1000);
 		}
 	}
@@ -398,44 +417,80 @@ int checkUpDown(int playerNum, int otherNum) {
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
-		gotoxy(26, 2);
-		cout << playerNum + 1 << " player choice";
+		gotoxy(23, 2);
+		cout << playerNum + 1 << " player(Life:"<<2-i<<")";
 		x = select(playerNum, 8);
 		if (num == x) {
 			//std::cout<<i+1<<"트 win \n";
-			gotoxy(32, 8);
-			std::cout << "Correct!";
+			EraseChoiceScene();
+			gotoxy(23, 4);
+			cout << "Correct!";
+			gotoxy(23, 5);
+			cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
+			gotoxy(23, 6);
+			cout << "Player" << playerNum + 1 << "의 승리";
+			gotoxy(23, 7);
+			cout << "Player" << playerNum + 1 <<" "<< 3*(2-i) << "코인 획득! ";
+			gotoxy(23, 8);
+			cout << "Player" << otherNum + 1 << " " << 3 * (2 - i) << "코인 압수 ! ";
 			Sleep(1000);
-			gotoxy(32, 8);
-			eraseInfoWindow(8);
+			EraseChoiceScene();
 			return 2 - i;
 		}
 		else if (num > x) {
 			gotoxy(33, 8);
-			std::cout << "Up";
+			cout << "Up";
 		}
 		else {
 			gotoxy(32, 8);
-			std::cout << "Down";
+			cout << "Down";
 		}
 	}
-	gotoxy(28, 8);
-	std::cout << "못맞춤";
+	gotoxy(25, 8);
+	cout << "맞추지 못했습니다";
 	return -1;
 }
 
 int checkEQ(int playerNum, int otherNum) {
 	//상대방이 숫자 골라 1~10
+	EraseChoiceScene();
+	gotoxy(23, 5);
+	cout << "Player" << otherNum + 1;
 	int num = select(otherNum, 8); //1~10
+	EraseChoiceScene();
+	gotoxy(23, 6);
+	cout << "Player" << playerNum + 1;
 	int x = select(playerNum, 9); //1 2
 	if (num % 2 == x % 2) {
-		gotoxy(33, 8);
-		cout << "win ";
+		EraseChoiceScene();
+		gotoxy(32, 4);
+		cout << "Win!";
+		gotoxy(23, 5);
+		cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
+		gotoxy(23, 6);
+		cout << "Player" << playerNum + 1 << "의 승리";
+		gotoxy(23, 7);
+		cout << "Player" << playerNum + 1 << " " << "5 코인 획득! ";
+		gotoxy(23, 8);
+		cout << "Player" << otherNum + 1 << " " << "5 코인 압수 ! ";
+		Sleep(1000);
+		EraseChoiceScene();
 		return 5;
 	}
 	else {
-		gotoxy(32, 8);
-		cout << "lose ";
+		EraseChoiceScene();
+		gotoxy(32, 4);
+		cout << "Lose";
+		gotoxy(23, 5);
+		cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
+		gotoxy(23, 6);
+		cout << "Player" << otherNum + 1 << "의 승리";
+		gotoxy(23, 7);
+		cout << "Player" << playerNum + 1 << " " << "5 코인 압수! ";
+		gotoxy(23, 8);
+		cout << "Player" << otherNum + 1 << " " << "5 코인 획득 ! ";
+		Sleep(1000);
+		EraseChoiceScene();
 		return -5;
 	}
 }
