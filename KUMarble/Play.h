@@ -15,7 +15,7 @@ void play();
 //int testSelect(int playerNum, int k);
 int rollDice(int playerNum);
 int useItem(int playerNum, int vod);
-int checkRSP(int playerNum, int otherNum);
+void checkRSP(int playerNum, int otherNum);
 void miniGame(int playerNum, int typeOfGame);
 int RSP(int playerNum);
 void shopping(int playerNum);
