@@ -24,9 +24,9 @@ void Player::setCoin(int x)
 {
 	if ((coin + x) < 0) {
 		coin = 0;
-		return;
 	}
-	coin += x;
+	else
+		coin += x;
 }
 
 int Player::getCoin()
@@ -38,9 +38,9 @@ void Player::setNowPosition(int x)
 {
 	if ((nowPosition + x) < 0) {
 		nowPosition = 0;
-		return;
 	}
-	nowPosition += x;
+	else
+		nowPosition += x;
 }
 
 int Player::getNowPosition()
