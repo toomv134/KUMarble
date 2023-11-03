@@ -170,7 +170,7 @@ void RenderPlayerInfo(Player p) {
 	gotoxy(x, y + 2);
 	cout << "now : " << p.getNowPosition() + 1;
 	gotoxy(x, y + 3);
-	cout << "to Goal : " << 26 - (p.getNowPosition() + 1);
+	cout << "to Goal : " << 27 - (p.getNowPosition() + 1);
 }
 
 void RenderPlayerNumChoice(int x) {

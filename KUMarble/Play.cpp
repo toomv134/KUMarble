@@ -98,7 +98,7 @@ void play()
 				EraseChoiceScene();
 				if (checkWin(i)) {
 					gotoxy(26, 6);
-					cout << "Player" <<i + 1 << "Player 승리";
+					cout << "Player" <<i + 1 << "승리";
 					Sleep(1000);
 					break; //마지막 타일 도착했는지 판별하고 다음 사람
 				}
@@ -465,13 +465,14 @@ int checkUpDown(int playerNum, int otherNum) {
 int checkEQ(int playerNum, int otherNum) {
 	//상대방이 숫자 골라 1~10
 	EraseChoiceScene();
-	gotoxy(23, 5);
+	gotoxy(23, 4);
 	cout << "Player" << otherNum + 1;
 	int num = select(otherNum, 8); //1~10
 	EraseChoiceScene();
-	gotoxy(23, 6);
+	gotoxy(23, 4);
 	cout << "Player" << playerNum + 1;
 	int x = select(playerNum, 9); //1 2
+
 	if (num % 2 == x % 2) {
 		EraseChoiceScene();
 		gotoxy(32, 4);
