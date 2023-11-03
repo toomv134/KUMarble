@@ -108,7 +108,7 @@ void play()
 		//cout<<"game over \n";
 		for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
 			Player p(i);
-			player.push_back(p);
+			player.pop_back();
 		}
 	}
 
@@ -415,7 +415,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 int checkUpDown(int playerNum, int otherNum) {
 	//상대방이 숫자 골라 1~10
 	gotoxy(26, 4);
-	cout <<"Player"<< otherNum + 1 << "숫자를 지정하세요";
+	cout <<"Player"<< otherNum + 1 << "숫자 지정";
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
@@ -445,7 +445,7 @@ int checkUpDown(int playerNum, int otherNum) {
 			gotoxy(33, 8);
 			cout << "Up";
 			Sleep(1000);
-			eraseInfoWindow(8);
+			EraseChoiceScene();
 		}
 		else {
 			gotoxy(26, 5);
@@ -453,7 +453,7 @@ int checkUpDown(int playerNum, int otherNum) {
 			gotoxy(32, 8);
 			cout << "Down";
 			Sleep(1000);
-			eraseInfoWindow(8);
+			EraseChoiceScene();
 		}
 	}
 	gotoxy(25, 8);
