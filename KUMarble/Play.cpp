@@ -32,6 +32,7 @@ void play()
 	firstshop = 10;
 	secondshop = 20;
 	while (1) {
+		somebodywin = false;
 		system("cls");
 		printMiniFrame();
 		if (select(0, 0) == 2) {//게임 플레이,종료 결정
@@ -405,6 +406,8 @@ int checkUpDown(int playerNum, int otherNum) {
 			gotoxy(32, 8);
 			std::cout << "Correct!";
 			Sleep(1000);
+			gotoxy(32, 8);
+			eraseInfoWindow(8);
 			return 2 - i;
 		}
 		else if (num > x) {
