@@ -335,6 +335,7 @@ void checkShop(int playerNum) {
 }
 
 void shopping(int playerNum) {
+	EraseChoiceScene();
 	//cout<<"shopping \n";
 	player[playerNum].setshopCnt();
 	//1. 가보자 (3) 2. 꼼짝마 (3) 3. 주주 (5) 4. 나가기
@@ -428,7 +429,7 @@ int checkUpDown(int playerNum, int otherNum) {
 			gotoxy(23, 4);
 			cout << "Correct!";
 			gotoxy(23, 5);
-			cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
+			cout << "Player" << otherNum + 1 << "이 정한 숫자:" << num;
 			gotoxy(26, 6);
 			cout << "Player" << playerNum + 1 << "의 승리";
 			gotoxy(23, 7);

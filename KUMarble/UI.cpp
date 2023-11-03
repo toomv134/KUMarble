@@ -214,13 +214,13 @@ void RenderUseItemChoice(Player player) {
 }
 
 void RenderBuyItemChoice() {
-	gotoxy(26, 5);
+	gotoxy(23, 5);
 	cout << "1. 가보자(3C)";
-	gotoxy(26, 6);
+	gotoxy(23, 6);
 	cout << "2. 꼼짝마(3C)";
-	gotoxy(26, 7);
+	gotoxy(23, 7);
 	cout << "3. 주사위주사위(5C)";
-	gotoxy(26, 8);
+	gotoxy(23, 8);
 	cout << "4. 나가기";
 }
 
