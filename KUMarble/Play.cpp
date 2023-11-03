@@ -417,7 +417,7 @@ int checkUpDown(int playerNum, int otherNum) {
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
-		gotoxy(23, 2);
+		gotoxy(26, 2);
 		cout << playerNum + 1 << " player(Life:"<<2-i<<")";
 		x = select(playerNum, 8);
 		if (num == x) {
@@ -427,7 +427,7 @@ int checkUpDown(int playerNum, int otherNum) {
 			cout << "Correct!";
 			gotoxy(23, 5);
 			cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
-			gotoxy(23, 6);
+			gotoxy(26, 6);
 			cout << "Player" << playerNum + 1 << "의 승리";
 			gotoxy(23, 7);
 			cout << "Player" << playerNum + 1 <<" "<< 3*(2-i) << "코인 획득! ";
@@ -440,10 +440,12 @@ int checkUpDown(int playerNum, int otherNum) {
 		else if (num > x) {
 			gotoxy(33, 8);
 			cout << "Up";
+			eraseInfoWindow(8);
 		}
 		else {
 			gotoxy(32, 8);
 			cout << "Down";
+			eraseInfoWindow(8);
 		}
 	}
 	gotoxy(25, 8);
@@ -496,10 +498,10 @@ int checkEQ(int playerNum, int otherNum) {
 }
 
 int checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 바위 보 바위 가위  보 
-	gotoxy(28, 4);
+	gotoxy(32, 4);
 	cout << "Player" << playerNum + 1;
 	int pnum = RSP(playerNum);
-	gotoxy(28, 4);
+	gotoxy(32, 4);
 	cout << "Player" << otherNum + 1;
 	int onum = RSP(otherNum);
 	if ((pnum == 1 && onum == 2) || (pnum == 2 && onum == 3) || (pnum == 3 && onum == 1)) return otherNum; //진거
