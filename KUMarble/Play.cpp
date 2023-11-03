@@ -506,10 +506,23 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 바위 보
 	gotoxy(32, 4);
 	cout << "Player" << otherNum + 1;
 	int onum = RSP(otherNum);
+	string pc, oc;
+	if (pnum == 1)	pc = "가위";
+	else if (pnum == 2)	pc = "바위";
+	else if (pnum == 3)	pc = " 보";
+
+	if (onum == 1)	oc = "가위";
+	else if (onum == 2)	oc = "바위";
+	else if (onum == 3)	oc = " 보";
+
 	if ((pnum == 1 && onum == 2) || (pnum == 2 && onum == 3) || (pnum == 3 && onum == 1)) {
 		EraseChoiceScene();
+		gotoxy(28, 4);
+		cout << "Player" << playerNum + 1 << " " << pc;
+		gotoxy(28, 5);
+		cout << "Player" << otherNum + 1 << " " << oc;
 		gotoxy(28, 6);
-		cout << "player" << otherNum + 1 << " 승리";
+		cout << "Player" << otherNum + 1 << " 승리";
 		gotoxy(23, 7);
 		cout << "Player" << otherNum + 1 << " " << "5 코인 획득! ";
 		gotoxy(23, 8);
@@ -520,8 +533,12 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 바위 보
 	} //진거
 	if ((pnum == 1 && onum == 3) || (pnum == 2 && onum == 1) || (pnum == 3 && onum == 2)) {
 		EraseChoiceScene();
+		gotoxy(28, 4);
+		cout << "Player" << playerNum + 1 << " " << pc;
+		gotoxy(28, 5);
+		cout << "Player" << otherNum + 1 << " " << oc;
 		gotoxy(28, 6);
-		cout << "player" << playerNum + 1 << " 승리";
+		cout << "Player" << playerNum + 1 << " 승리";
 		gotoxy(23, 7);
 		cout << "Player" << playerNum + 1 << " " << "5 코인 획득! ";
 		gotoxy(23, 8);
@@ -532,8 +549,14 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 바위 보
 	}
 	if (pnum == onum) {
 		EraseChoiceScene();
-		gotoxy(28, 6);
-		cout << "비겼습니다" << endl;
+		gotoxy(28, 4);
+		cout << "Player" << playerNum + 1 << " " << pc;
+		gotoxy(28, 5);
+		cout << "Player" << otherNum + 1 << " " << oc;
+		gotoxy(26, 6);
+		cout << "가위바위보 무승부";
+		gotoxy(23, 7);
+		cout << "아무일도 일어나지 않았다";
 		Sleep(1000);
 	}
 }

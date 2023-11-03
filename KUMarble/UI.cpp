@@ -252,9 +252,9 @@ void RenderUpDownChoice(int x) {
 
 void RenderEQChoice() {
 	gotoxy(33, 5);
-	cout << "È¦";
+	cout << "È¦¼ö";
 	gotoxy(33, 6);
-	cout << "Â¦";
+	cout << "Â¦¼ö";
 }
 
 void RenderChoiceNum(int x) {
@@ -322,20 +322,24 @@ void RenderAct(int map) {
 	//7 ÄÚÀÎ ÀÒ±â
 	eraseInfoWindow(2);
 	if (map == 0) {
-		gotoxy(30, 2);
-		cout << "¾ÕÀ¸·Î 3Ä­";
+		gotoxy(26, 6);
+		cout << "¾ÕÀ¸·Î ÀÌµ¿ Å¸ÀÏ µµÂø";
+		gotoxy(30, 7);
+		cout << "3Ä­ ÀüÁø !";
 		Sleep(1000);
 		EraseChoiceScene();
 	}
 	else if (map == 1) {
-		gotoxy(30, 2);
-		cout << "µÚ·Î 3Ä­";
+		gotoxy(26, 6);
+		cout << "µÚ·Î ÀÌµ¿ Å¸ÀÏ µµÂø";
+		gotoxy(30, 7);
+		cout << "3Ä­ ÈÄÁø !";
 		Sleep(1000);
 		EraseChoiceScene();
 	}
 	else if (map == 2) {
-		gotoxy(30, 2);
-		cout << "»óÁ¡ Å¸ÀÏ";
+		gotoxy(26, 6);
+		cout << "»óÁ¡ Å¸ÀÏ ÃâÇö";
 		Sleep(1000);
 	}
 	else if (map == 3) {
