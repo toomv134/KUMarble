@@ -477,7 +477,7 @@ int checkEQ(int playerNum, int otherNum) {
 		gotoxy(32, 4);
 		cout << "Win!";
 		gotoxy(23, 5);
-		cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
+		cout << "Player" << otherNum + 1 << "이 정한 숫자:" << num;
 		gotoxy(23, 6);
 		cout << "Player" << playerNum + 1 << "의 승리";
 		gotoxy(23, 7);
@@ -493,7 +493,7 @@ int checkEQ(int playerNum, int otherNum) {
 		gotoxy(32, 4);
 		cout << "Lose";
 		gotoxy(23, 5);
-		cout << "Player" << otherNum + 1 << "이 정한 숫자 : " << num;
+		cout << "Player" << otherNum + 1 << "이 정한 숫자:" << num;
 		gotoxy(23, 6);
 		cout << "Player" << otherNum + 1 << "의 승리";
 		gotoxy(23, 7);
