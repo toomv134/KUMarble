@@ -36,13 +36,6 @@ void eraseCursor()
 	cout << "  ";
 }
 
-void moveToInfoxy() {
-	gotoxy(47, 9);
-	renderCursor();
-}
-
-
-
 /*
 ÇÃ·¹ÀÌ¾î 1 ½ÃÀÛ À§Ä¡
 x =1
@@ -277,38 +270,6 @@ void RenderWhoseTurnTitle(int playerNum)
 {
 	gotoxy(27, 1);
 	cout << "<Player " << playerNum + 1 << " Â÷·Ê>";
-}
-
-void RenderTradeCoinInfo(int win, int lose, int coin)
-{
-	gotoxy(26, 1);
-	RenderGetCoinInfo(win, coin);
-	gotoxy(26, 2);
-	RenderLoseCoinInfo(lose, coin);
-}
-
-void RenderGetCoinInfo(int playerNum, int coin)
-{
-	cout << "player " << playerNum << " " << coin << "coin È¹µæ!";
-}
-
-void RenderLoseCoinInfo(int playerNum, int coin)
-{
-	cout << "player " << playerNum << " " << coin << "coin »¯±è!";
-}
-
-void RenderGetCoinByMapTitleInfo(int playerNum)
-{
-	gotoxy(26, 1);
-	cout << "ÆÄ¶ûÅ¸ÀÏ µµÂø!";
-	RenderGetCoinInfo(playerNum, 3);
-}
-
-void RenderLoseCoinByMapTitleInfo(int playerNum)
-{
-	gotoxy(26, 1);
-	cout << "»¡°­Å¸ÀÏ µµÂø!";
-	RenderLoseCoinInfo(playerNum, 3);
 }
 
 void RenderAct(int map) {
