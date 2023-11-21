@@ -17,7 +17,7 @@ void RenderDiceItemChoice();
 void RenderGameStartChoice();
 void RenderUseItemChoice(Player player);
 void RenderBuyItemChoice();
-void RenderMinigamePlayerChoice(int numberOfPlayer, Player player);
+void RenderMinigamePlayerChoice(int numberOfPlayer, Player player, int check);
 void RenderRSPChoice();
 void RenderUpDownChoice(int x);
 void RenderEQChoice();
