@@ -50,7 +50,7 @@ void play()
 			}
 			system("cls");
 			printFrame();
-			RenderPlayersState(player); //플레이어들 정보 갱신 
+			RenderPlayersState(player,map.size()); //플레이어들 정보 갱신 
 			for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
 				player[i].setDice(select(i, 2) - 1);
 			}
@@ -65,7 +65,7 @@ void play()
 				//게임씬나오고
 				// 얘네 플레이 하는 명수에 따라 포문 설정해주기
 				for (int i = 0; i < numberOfPlayer; i++) {
-					RenderPlayersState(player); //플레이어들 정보 갱신 
+					RenderPlayersState(player, map.size()); //플레이어들 정보 갱신 
 					int ifUseItem = select(i, 3);
 					//누구누구차례 y=1 erase, render
 					//지금 뭐하는지 y=2 erase,render 
@@ -88,7 +88,7 @@ void play()
 
 					player[i].setNowPosition(vod);// 이동
 					ErasePlayersState(player);
-					RenderPlayersState(player); //이동하고 정보 갱신 
+					RenderPlayersState(player, map.size()); //이동하고 정보 갱신 
 
 					checkTile(i);
 					// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
@@ -209,6 +209,8 @@ int select(int playerNum, int k)
 			if (n > playerNum)	return n;
 			else return n - 1;
 		}
+
+
 	}
 	else if (k == 7) { //7: 가위바위보 정하기	return 1:가위 2:바위 3: 보  
 		RenderRSPChoice();
@@ -388,7 +390,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 
 		n = select(playerNum, 6);
 		//TODO
-		
+		EraseChoiceScene();
 		checkRSP(playerNum, n);
 		if (n == -1) {
 			player[playerNum].resetMinigameDid();
@@ -437,7 +439,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 			player[playerNum].resetMinigameDid();
 			return;
 		}
-		miniGame(playerNum, 3);
+		miniGame(playerNum, 4);
 	}
 	else if (typeOfGame == 5) { //홀짝
 		RenderAct(typeOfGame);
@@ -449,7 +451,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 			player[playerNum].resetMinigameDid();
 			return;
 		}
-		miniGame(playerNum, 3);
+		miniGame(playerNum, 5);
 	}
 }
 
