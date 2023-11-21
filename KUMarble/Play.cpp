@@ -596,18 +596,6 @@ void readMap()
 	}
 }
 
-//select 
-//0: 게임 시작
-//1: 플레이어 수 정하기
-//2: 주사위 종류 정하기
-//3: 주사위,아이템 결정
-//4: 무슨 아이템쓸건지 0, 1, 
-//5: 상점에서 무슨 아이템 구매할건지
-//6: 어느 플레이어와 게임할지
-//7: 가위바위보 정하기
-//8: 업다운 정하기
-//9: 홀짝 정하기
-
 int rollDice(int playerNum) {
 	srand((unsigned int)time(NULL));
 	int typeOfDice = player[playerNum].getDice();

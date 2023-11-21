@@ -22,11 +22,11 @@ int Player::getNum()
 
 void Player::setCoin(int x)
 {
-	if ((coin + x) < 0) {
-		coin = 0;
-	}
-	else
-		coin += x;
+	//if ((coin + x) < 0) {
+	//	coin = 0;
+	//}
+	//else
+	coin += x;
 }
 
 int Player::getCoin()
