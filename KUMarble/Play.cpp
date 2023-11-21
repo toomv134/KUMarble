@@ -179,14 +179,33 @@ int select(int playerNum, int k)
 		return cursorControl(4);
 	}
 	else if (k == 6) { //6: 어느 플레이어와 게임할지 return : 상대방의 번호(벡터상의번호) 
-		RenderMinigamePlayerChoice(numberOfPlayer, player[playerNum]);
+		// 리턴이 -1이면 나가기 한것
+		int check = 0;//한명이라도 선택했으면 1, 처음선택이면 0
+		for (int i = 0; i < numberOfPlayer; i++) {
+			if (player[playerNum].getMinigameDid(i) == 1) check++;
+		}
 
-		int n = cursorControl(numberOfPlayer - 1);
+		RenderMinigamePlayerChoice(numberOfPlayer, player[playerNum], check);
+		int howManyChoose;
+		if (check == 0)howManyChoose = numberOfPlayer - 1;
+		else howManyChoose = numberOfPlayer - check;
+		if (numberOfPlayer - howManyChoose == 1)return -1;
+		int n = cursorControl(howManyChoose);
 		if (numberOfPlayer == 2) {
 			if (playerNum == 0)	return 1;
 			else return 0;
 		}
 		else {
+			if (check != 0 && n == howManyChoose) return -1;
+			int temp = 0;
+			for (int i = 0; i < numberOfPlayer; i++) {
+				if (i!=playerNum && player[playerNum].getMinigameDid(i) == 0) {
+					temp++;
+					if (temp == n) {
+						return i;
+					}
+				}
+			}
 			if (n > playerNum)	return n;
 			else return n - 1;
 		}
@@ -368,7 +387,15 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 		RenderAct(typeOfGame);
 
 		n = select(playerNum, 6);
+		//TODO
+		
 		checkRSP(playerNum, n);
+		if (n == -1) {
+			player[playerNum].resetMinigameDid();
+			return;
+		}
+		miniGame(playerNum, 3);
+
 		//if (winner == n) { //졌음
 		//	EraseChoiceScene();
 		//	gotoxy(28, 6);
@@ -406,7 +433,11 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 		int tk = checkUpDown(playerNum, n) * 3; //2 1 0 -1
 		player[playerNum].setCoin(tk);
 		player[n].setCoin(-tk);
-
+		if (n == -1) {
+			player[playerNum].resetMinigameDid();
+			return;
+		}
+		miniGame(playerNum, 3);
 	}
 	else if (typeOfGame == 5) { //홀짝
 		RenderAct(typeOfGame);
@@ -414,6 +445,11 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 		int tk = checkEQ(playerNum, n - 1); //5 -5
 		player[playerNum].setCoin(tk);
 		player[n].setCoin(-tk);
+		if (n == -1) {
+			player[playerNum].resetMinigameDid();
+			return;
+		}
+		miniGame(playerNum, 3);
 	}
 }
 
