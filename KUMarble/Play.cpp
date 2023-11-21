@@ -381,7 +381,7 @@ void shopping(int playerNum) {
 }
 
 void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum	
-
+	EraseChoiceScene();
 	int n;
 	if (typeOfGame == 3) { //가위바위보	
 		RenderAct(typeOfGame);
