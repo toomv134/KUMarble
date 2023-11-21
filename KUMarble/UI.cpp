@@ -82,13 +82,13 @@ void RenderGameStartChoice() {
 	cout << "게임 종료";
 }
 
-void RenderPlayersState(vector<Player> player) {
+void RenderPlayersState(vector<Player> player, int n) {
 	for (int i = 0; i < player.size(); i++) {
-		RenderPlayerInfo(player[i]);
+		RenderPlayerInfo(player[i],n);
 	}
 }
 
-void RenderPlayerInfo(Player p) {
+void RenderPlayerInfo(Player p,int n) {
 	int x = 0;
 	int y = 0;
 	int num = p.getNum();
@@ -126,7 +126,7 @@ void RenderPlayerInfo(Player p) {
 	gotoxy(x, y + 2);
 	cout << "now : " << p.getNowPosition() + 1;
 	gotoxy(x, y + 3);
-	cout << "to Goal : " << 26 - (p.getNowPosition() + 1);
+	cout << "to Goal : " << n - (p.getNowPosition() + 1);
 }
 
 void RenderPlayerNumChoice(int x) {

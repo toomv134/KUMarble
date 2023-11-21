@@ -10,7 +10,7 @@ void gotoxy(int x, int y);
 void printFrame();
 void renderCursor();
 void eraseCursor();
-void RenderPlayerInfo(Player p);
+void RenderPlayerInfo(Player p,int n);
 void RenderDiceChoice();
 void RenderPlayerNumChoice(int x);
 void RenderDiceItemChoice();
@@ -25,7 +25,7 @@ void RenderChoiceNum(int x);
 void RenderChoicePlayerNumTitle();//<플레이할 인원수 선택> 
 void RenderWhoseTurnTitle(int playerNum);//<Player 1 차례>
 void EraseChoiceScene();
-void RenderPlayersState(vector<Player> player);
+void RenderPlayersState(vector<Player> player,int n);
 void ErasePlayerInfo(int playerNum);
 void ErasePlayersState(vector<Player> player);
 void RenderAct(int map);
