@@ -13,6 +13,7 @@ Player::Player(int x)
 	item[1] = 0;
 	itemEffect = 0;
 	shopCnt = 0;
+	
 }
 
 int Player::getNum()
@@ -98,4 +99,21 @@ int Player::getshopCnt()
 void Player::setshopCnt()
 {
 	shopCnt++;
+}
+
+void Player::setMinigameDid(int n)
+{
+	minigameDid[n] = 1;
+}
+
+int Player::getMinigameDid(int n)
+{
+	return minigameDid[n];
+}
+
+void Player::resetMinigameDid()
+{
+	for (int i = 0; i < 4; i++) {
+		minigameDid[i] = 0;
+	}
 }

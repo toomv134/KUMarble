@@ -9,6 +9,7 @@ private:
 	int item[2];
 	int itemEffect;
 	int shopCnt;
+	int minigameDid[4];
 
 public:
 	Player(int x);
@@ -27,4 +28,7 @@ public:
 	void setItem(int n, int x);
 	int getshopCnt();
 	void setshopCnt();
+	void setMinigameDid(int n);
+	int getMinigameDid(int n);
+	void resetMinigameDid();
 };
