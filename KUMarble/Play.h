@@ -6,6 +6,7 @@
 #include<ctime>
 #include<cstring>
 #include<conio.h>
+#include <io.h>
 #include "Player.h"
 #include "UI.h"
 #include <fstream>
@@ -25,7 +26,7 @@ int checkUpDown(int playerNum, int otherNum);
 int checkEQ(int playerNum, int otherNum);
 bool checkWin(int playerNum);
 void readMap();
-
+void findMap();
 int select(int playerNum, int k);
 int cursorControl(int numberOfIndex);
 int updowncursorControl(int min, int max);

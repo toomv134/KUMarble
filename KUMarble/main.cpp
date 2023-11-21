@@ -5,6 +5,7 @@ using namespace std;
 
 int main() {
 	srand((unsigned int)time(NULL));
-	play();
+	//play();
+	findMap();
 	return 0;
 }

@@ -20,7 +20,7 @@ int map[27];
 //	6,5
 //}; // 파일 입출력으로 수정
 
-int firstshop, secondshop;
+int shop[2];
 bool somebodywin = false;
 int numberOfPlayer;
 
@@ -28,9 +28,6 @@ void play()
 {
 
 	readMap();
-
-	firstshop = 10;
-	secondshop = 20;
 	while (1) {
 		somebodywin = false;
 		system("cls");
@@ -322,13 +319,13 @@ void checkTile(int playerNum) {
 
 void checkShop(int playerNum) {
 	if (player[playerNum].getNowPosition() >= 26)return;
-	if (player[playerNum].getNowPosition() > firstshop && player[playerNum].getshopCnt() == 0) {
+	if (player[playerNum].getNowPosition() > shop[0] && player[playerNum].getshopCnt() == 0) {
 		shopping(playerNum);
 	}
-	else if (player[playerNum].getNowPosition() > secondshop && player[playerNum].getshopCnt() == 1) {
+	else if (player[playerNum].getNowPosition() > shop[1] && player[playerNum].getshopCnt() == 1) {
 		shopping(playerNum);
 	}
-	else if (player[playerNum].getNowPosition() > secondshop && player[playerNum].getshopCnt() == 0) {
+	else if (player[playerNum].getNowPosition() > shop[1] && player[playerNum].getshopCnt() == 0) {
 		shopping(playerNum);
 		shopping(playerNum);
 	}
@@ -586,14 +583,43 @@ int useItem(int playerNum, int vod) { // select4 return 0 : 나가기,아이템 없음  
 }
 
 void readMap()
-{
+{	
+	int n = 0;
+	int i = 0;
 	ifstream readFile;
 	readFile.open("map.txt");
 	if (readFile.is_open()) {
-		for (int i = 0; i < 27; i++) {
+		//for (int i = 0; i < 27; i++) {
+		while (!readFile.eof()){
 			readFile >> map[i];
+			if (map[i] == 2) {
+				shop[n++] = i;
+			}
+			i++;
 		}
 	}
+}
+
+void findMap() {
+	string path = "\*.txt";
+	int n = 1;
+	struct _finddata_t fd;
+
+	intptr_t handle;
+
+	if ((handle = _findfirst(path.c_str(), &fd)) == -1L)
+	{
+
+		cout << "No file in directory!" << endl;
+		// 파일이 없을경우 발생시킬 이벤트.
+	}
+	do
+	{
+		cout << n ++ << ". " << fd.name << endl;
+
+	} while (_findnext(handle, &fd) == 0);
+
+	_findclose(handle);
 }
 
 int rollDice(int playerNum) {
