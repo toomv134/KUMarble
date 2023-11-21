@@ -337,6 +337,42 @@ void printMiniFrame()
 	gotoxy(21, 9);
 	cout << "└─────────────────────────┘";
 }
+
+void printMapChoiceFrame(){
+	gotoxy(15, 2);
+	cout << "┌───────────────────────────────────┐";
+	gotoxy(15, 3);
+	cout << "│                                   │";
+	gotoxy(15, 4);
+	cout << "│                                   │";
+	gotoxy(15, 5);
+	cout << "│                                   │";
+	gotoxy(15, 6);
+	cout << "│                                   │";
+	gotoxy(15, 7);
+	cout << "│                                   │";
+	gotoxy(15, 8);
+	cout << "│                                   │";
+	gotoxy(15, 9);
+	cout << "│                                   │";
+	gotoxy(15, 10);
+	cout << "└───────────────────────────────────┘";
+}
+
+void RenderChoiceMap(vector<string> map,int n) {
+	eraseInfoWindow(6);
+	gotoxy(33, 4);
+	cout << "▲";
+	gotoxy(33-map[n].size()/2, 6);
+	cout << map[n];
+	gotoxy(33, 8);
+	cout << "▼";
+}
+
+void EraseChoiceMap() {
+	gotoxy(17, 6);
+	cout << "                                  ";
+}
 /*
 커서컨트롤 사촌(int max, int min){
 	int n = (max+min)/2;

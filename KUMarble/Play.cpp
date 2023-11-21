@@ -1,7 +1,8 @@
 #include "Play.h"
 
-vector<Player> player;
+#define Max 2,147,483,647
 
+vector<Player> player;
 //0 앞으로 3칸
 //1 뒤로 3칸
 //2 상점
@@ -10,7 +11,8 @@ vector<Player> player;
 //5 홀짝
 //6 코인 얻기
 //7 코인 잃기
-int map[27];
+vector<int> map;
+vector<string> mapName;
 //int map[27] = {
 //	3,7,4,0,3,
 //	7,6,0,1,7,
@@ -27,85 +29,90 @@ int numberOfPlayer;
 void play()
 {
 
-	readMap();
 	while (1) {
+		shop[0] = shop[1] = Max;
 		somebodywin = false;
+		map.clear();
+		mapName.clear();
 		system("cls");
 		printMiniFrame();
 		if (select(0, 0) == 2) {//게임 플레이,종료 결정
 			return;
 		}
+		//맵 결정 상점 2개이상이면 컷
+		if (ChoiceMap()) {
+			printFrame();
+			numberOfPlayer = select(0, 1);//플레이어 수 결정
 
-		numberOfPlayer = select(0, 1);//플레이어 수 결정
-
-		for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
-			Player p(i);
-			player.push_back(p);
-		}
-		system("cls");
-		printFrame();
-		RenderPlayersState(player); //플레이어들 정보 갱신 
-		for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
-			player[i].setDice(select(i, 2) - 1);
-		}
-
-		//초반 세팅
-		//RenderPlayersState(player);
-
-		// 게임 시작
-
-		while (!somebodywin) { //누군가 이길때까지
-			int vod = 0; //value of dice
-			//게임씬나오고
-			// 얘네 플레이 하는 명수에 따라 포문 설정해주기
-			for (int i = 0; i < numberOfPlayer; i++) {
-				RenderPlayersState(player); //플레이어들 정보 갱신 
-				int ifUseItem = select(i, 3);
-				//누구누구차례 y=1 erase, render
-				//지금 뭐하는지 y=2 erase,render 
-				if (ifUseItem == 2) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
-					player[i].setItemEffect(useItem(i, select(i, 4))); //아이템 이펙트 바뀜 select4 return 0 : 나가기,아이템 없음  1 : 주사위주사위 3 : 가보자
-
-				}
-				vod = rollDice(i);
-				gotoxy(31, 8);
-				//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
-				cout << "Dice : " << vod << endl;
-				Sleep(1000);
-				eraseInfoWindow(8);
-				if (player[i].getItemEffect() != 0) {
-					gotoxy(26, 9);
-					cout << "아이템 효과 : " << player[i].getItemEffect();
-					vod += player[i].getItemEffect();
-					player[i].resetItemEffect();
-				}
-
-				player[i].setNowPosition(vod);// 이동
-				ErasePlayersState(player);
-				RenderPlayersState(player); //이동하고 정보 갱신 
-
-				checkTile(i);
-				// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
-				Sleep(1000);
-
-				EraseChoiceScene();
-				checkShop(i);
-
-				ErasePlayersState(player);
-				EraseChoiceScene();
-				if (checkWin(i)) {
-					gotoxy(26, 6);
-					cout << "Player" <<i + 1 << "승리";
-					Sleep(1000);
-					break; //마지막 타일 도착했는지 판별하고 다음 사람
-				}
+			for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
+				Player p(i);
+				player.push_back(p);
+			}
+			system("cls");
+			printFrame();
+			RenderPlayersState(player); //플레이어들 정보 갱신 
+			for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
+				player[i].setDice(select(i, 2) - 1);
 			}
 
-		}
-		//cout<<"game over \n";
-		for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
-			Player p(i);
-			player.pop_back();
+			//초반 세팅
+			//RenderPlayersState(player);
+
+			// 게임 시작
+
+			while (!somebodywin) { //누군가 이길때까지
+				int vod = 0; //value of dice
+				//게임씬나오고
+				// 얘네 플레이 하는 명수에 따라 포문 설정해주기
+				for (int i = 0; i < numberOfPlayer; i++) {
+					RenderPlayersState(player); //플레이어들 정보 갱신 
+					int ifUseItem = select(i, 3);
+					//누구누구차례 y=1 erase, render
+					//지금 뭐하는지 y=2 erase,render 
+					if (ifUseItem == 2) {//아이템 선택 //지금 뭐하는지 y=2 erase, render
+						player[i].setItemEffect(useItem(i, select(i, 4))); //아이템 이펙트 바뀜 select4 return 0 : 나가기,아이템 없음  1 : 주사위주사위 3 : 가보자
+
+					}
+					vod = rollDice(i);
+					gotoxy(31, 8);
+					//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
+					cout << "Dice : " << vod << endl;
+					Sleep(1000);
+					eraseInfoWindow(8);
+					if (player[i].getItemEffect() != 0) {
+						gotoxy(26, 9);
+						cout << "아이템 효과 : " << player[i].getItemEffect();
+						vod += player[i].getItemEffect();
+						player[i].resetItemEffect();
+					}
+
+					player[i].setNowPosition(vod);// 이동
+					ErasePlayersState(player);
+					RenderPlayersState(player); //이동하고 정보 갱신 
+
+					checkTile(i);
+					// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
+					Sleep(1000);
+
+					EraseChoiceScene();
+					checkShop(i);
+
+					ErasePlayersState(player);
+					EraseChoiceScene();
+					if (checkWin(i)) {
+						gotoxy(26, 6);
+						cout << "Player" << i + 1 << "승리";
+						Sleep(1000);
+						break; //마지막 타일 도착했는지 판별하고 다음 사람
+					}
+				}
+
+			}
+			//cout<<"game over \n";
+			for (int i = 0; i < numberOfPlayer; i++) {//플레이어 수 만큼 플레이어 생성
+				Player p(i);
+				player.pop_back();
+			}
 		}
 	}
 
@@ -582,29 +589,39 @@ int useItem(int playerNum, int vod) { // select4 return 0 : 나가기,아이템 없음  
 		return vod;
 }
 
-void readMap()
+bool readMap(string mapName)
 {	
 	int n = 0;
+	int num = 0;
 	int i = 0;
 	ifstream readFile;
-	readFile.open("map.txt");
+	readFile.open(mapName);
 	if (readFile.is_open()) {
-		//for (int i = 0; i < 27; i++) {
 		while (!readFile.eof()){
-			readFile >> map[i];
-			if (map[i] == 2) {
+			readFile >> num;
+			map.push_back(num);
+			if (num == 2) {
+				if (n == 2) {
+					gotoxy(20, 9);
+					cout << "상점은 2개이상이면 안됩니다.";
+					Sleep(1000);
+					return false;
+				}
 				shop[n++] = i;
 			}
 			i++;
 		}
 	}
+	return true;
 }
 
 void findMap() {
 	string path = "\*.txt";
 	int n = 1;
+	int k = 3;
 	struct _finddata_t fd;
-
+	gotoxy(31, 1);
+	cout << "맵 선택";
 	intptr_t handle;
 
 	if ((handle = _findfirst(path.c_str(), &fd)) == -1L)
@@ -615,13 +632,55 @@ void findMap() {
 	}
 	do
 	{
-		cout << n ++ << ". " << fd.name << endl;
+		mapName.push_back(fd.name);
+		//gotoxy(23, k++);
+		//cout << n++ << ". " << mapName[n-1];
+		//cout << n ++ << ". " << fd.name;
 
 	} while (_findnext(handle, &fd) == 0);
 
 	_findclose(handle);
 }
 
+int CursorMapChoice() {
+	int n = 0;
+	gotoxy(26, 6);
+	RenderChoiceMap(mapName,n);
+	int input = 0;
+	while (input != 13) {
+		input = _getch();
+		if (input == 224) {
+			input = _getch();
+			if (input == 72) {
+				if (n != mapName.size() - 1) {
+					n++;
+				}
+				else {
+					n = 0;
+				}
+			}
+			else if (input == 80) {
+				if (n != 0) {
+					n--;
+				}
+				else {
+					n = mapName.size() - 1;
+				}
+			}
+		}
+		gotoxy(26, 6);
+		EraseChoiceMap();
+		RenderChoiceMap(mapName,n);
+	}
+	//EraseChoiceScene();
+	return n;
+}
+
+bool ChoiceMap() {
+	printMapChoiceFrame();
+	findMap();
+	return readMap(mapName[CursorMapChoice()]);
+}
 int rollDice(int playerNum) {
 	srand((unsigned int)time(NULL));
 	int typeOfDice = player[playerNum].getDice();
