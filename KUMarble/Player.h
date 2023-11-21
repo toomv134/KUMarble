@@ -9,7 +9,8 @@ private:
 	int item[2];
 	int itemEffect;
 	int shopCnt;
-	int minigameDid[4];
+	int minigameDid[4] = {0,};
+
 
 public:
 	Player(int x);

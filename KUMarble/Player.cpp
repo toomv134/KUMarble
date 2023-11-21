@@ -13,7 +13,6 @@ Player::Player(int x)
 	item[1] = 0;
 	itemEffect = 0;
 	shopCnt = 0;
-	
 }
 
 int Player::getNum()

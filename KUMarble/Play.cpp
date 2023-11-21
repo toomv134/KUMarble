@@ -186,10 +186,11 @@ int select(int playerNum, int k)
 		}
 
 		RenderMinigamePlayerChoice(numberOfPlayer, player[playerNum], check);
-		int howManyChoose;
+		
+		int howManyChoose = numberOfPlayer - check;
 		if (check == 0)howManyChoose = numberOfPlayer - 1;
-		else howManyChoose = numberOfPlayer - check;
-		if (numberOfPlayer - howManyChoose == 1)return -1;
+
+		if (numberOfPlayer - check == 1)return -1;
 		int n = cursorControl(howManyChoose);
 		if (numberOfPlayer == 2) {
 			if (playerNum == 0)	return 1;
@@ -197,17 +198,15 @@ int select(int playerNum, int k)
 		}
 		else {
 			if (check != 0 && n == howManyChoose) return -1;
-			int temp = 0;
+			int temp = 1;
 			for (int i = 0; i < numberOfPlayer; i++) {
 				if (i!=playerNum && player[playerNum].getMinigameDid(i) == 0) {
-					temp++;
 					if (temp == n) {
 						return i;
 					}
+					temp++;
 				}
 			}
-			if (n > playerNum)	return n;
-			else return n - 1;
 		}
 	}
 	else if (k == 7) { //7: 가위바위보 정하기	return 1:가위 2:바위 3: 보  
@@ -380,20 +379,32 @@ void shopping(int playerNum) {
 	}
 }
 
-void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum	
+void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 	EraseChoiceScene();
+	
+	int check = 0;//한명이라도 선택했으면 1, 처음선택이면 0
+	for (int i = 0; i < numberOfPlayer; i++) {
+		if (player[playerNum].getMinigameDid(i) == 1) check++;
+	}
+	int howManyChoose = numberOfPlayer - check;
+	if (check == 0)howManyChoose = numberOfPlayer - 1;
+	if (numberOfPlayer - check == 1)return;
+
+	
 	int n;
 	if (typeOfGame == 3) { //가위바위보	
 		RenderAct(typeOfGame);
 
 		n = select(playerNum, 6);
-		//TODO
-		
-		checkRSP(playerNum, n);
+		player[playerNum].setMinigameDid(n);
 		if (n == -1) {
 			player[playerNum].resetMinigameDid();
 			return;
 		}
+		//TODO
+		EraseChoiceScene();
+		checkRSP(playerNum, n);
+		
 		miniGame(playerNum, 3);
 
 		//if (winner == n) { //졌음
@@ -430,26 +441,32 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 	else if (typeOfGame == 4) { //업다운
 		RenderAct(typeOfGame);
 		n = select(playerNum, 6);
-		int tk = checkUpDown(playerNum, n) * 3; //2 1 0 -1
-		player[playerNum].setCoin(tk);
-		player[n].setCoin(-tk);
+		player[playerNum].setMinigameDid(n);
 		if (n == -1) {
 			player[playerNum].resetMinigameDid();
 			return;
 		}
-		miniGame(playerNum, 3);
+		EraseChoiceScene();
+		int tk = checkUpDown(playerNum, n) * 3; //2 1 0 -1
+		player[playerNum].setCoin(tk);
+		player[n].setCoin(-tk);
+		
+		miniGame(playerNum, 4);
 	}
 	else if (typeOfGame == 5) { //홀짝
 		RenderAct(typeOfGame);
 		n = select(playerNum, 6);
-		int tk = checkEQ(playerNum, n - 1); //5 -5
-		player[playerNum].setCoin(tk);
-		player[n].setCoin(-tk);
+		player[playerNum].setMinigameDid(n);
 		if (n == -1) {
 			player[playerNum].resetMinigameDid();
 			return;
 		}
-		miniGame(playerNum, 3);
+		EraseChoiceScene();
+		int tk = checkEQ(playerNum, n - 1); //5 -5
+		player[playerNum].setCoin(tk);
+		player[n].setCoin(-tk);
+		
+		miniGame(playerNum, 5);
 	}
 }
 
