@@ -185,13 +185,13 @@ void RenderMinigamePlayerChoice(int numberOfPlayer, Player player, int check) {
 	gotoxy(26, 4);
 	cout << "플레이어 한명 지정";
 	for (int i = 0; i < numberOfPlayer; i++) {
-		if (player.getMinigameDid(i) == 0) {
+		if (player.getNum()!=i && player.getMinigameDid(i) == 0) {
 			gotoxy(28, p);
 			cout << i + 1 << "번 플레이어";
 			p++;
 		}
 	}
-	if (check == 1) {
+	if (check != 0) {
 		gotoxy(28, p);
 		cout << "나  가  기";
 	}

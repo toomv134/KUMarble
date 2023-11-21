@@ -3,14 +3,14 @@
 #define Max 2,147,483,647
 
 vector<Player> player;
-//0 ¾ÕÀ¸·Î 3Ä­
-//1 µÚ·Î 3Ä­
-//2 »óÁ¡
-//3 °¡À§¹ÙÀ§º¸
-//4 ¾÷´Ù¿î
-//5 È¦Â¦
-//6 ÄÚÀÎ ¾ò±â
-//7 ÄÚÀÎ ÀÒ±â
+//0 ì•ìœ¼ë¡œ 3ì¹¸
+//1 ë’¤ë¡œ 3ì¹¸
+//2 ìƒì 
+//3 ê°€ìœ„ë°”ìœ„ë³´
+//4 ì—…ë‹¤ìš´
+//5 í™€ì§
+//6 ì½”ì¸ ì–»ê¸°
+//7 ì½”ì¸ ìƒê¸°
 vector<int> map;
 vector<string> mapName;
 //int map[27] = {
@@ -20,7 +20,7 @@ vector<string> mapName;
 //	6,5,4,7,0,
 //	2,3,5,6,1,
 //	6,5
-//}; // ÆÄÀÏ ÀÔÃâ·ÂÀ¸·Î ¼öÁ¤
+//}; // íŒŒì¼ ì…ì¶œë ¥ìœ¼ë¡œ ìˆ˜ì •
 
 int shop[2];
 bool somebodywin = false;
@@ -36,62 +36,62 @@ void play()
 		mapName.clear();
 		system("cls");
 		printMiniFrame();
-		if (select(0, 0) == 2) {//°ÔÀÓ ÇÃ·¹ÀÌ,Á¾·á °áÁ¤
+		if (select(0, 0) == 2) {//ê²Œì„ í”Œë ˆì´,ì¢…ë£Œ ê²°ì •
 			return;
 		}
-		//¸Ê °áÁ¤ »óÁ¡ 2°³ÀÌ»óÀÌ¸é ÄÆ
+		//ë§µ ê²°ì • ìƒì  2ê°œì´ìƒì´ë©´ ì»·
 		if (ChoiceMap()) {
 			printFrame();
-			numberOfPlayer = select(0, 1);//ÇÃ·¹ÀÌ¾î ¼ö °áÁ¤
+			numberOfPlayer = select(0, 1);//í”Œë ˆì´ì–´ ìˆ˜ ê²°ì •
 
-			for (int i = 0; i < numberOfPlayer; i++) {//ÇÃ·¹ÀÌ¾î ¼ö ¸¸Å­ ÇÃ·¹ÀÌ¾î »ı¼º
+			for (int i = 0; i < numberOfPlayer; i++) {//í”Œë ˆì´ì–´ ìˆ˜ ë§Œí¼ í”Œë ˆì´ì–´ ìƒì„±
 				Player p(i);
 				player.push_back(p);
 			}
 			system("cls");
 			printFrame();
-			RenderPlayersState(player,map.size()); //ÇÃ·¹ÀÌ¾îµé Á¤º¸ °»½Å 
-			for (int i = 0; i < numberOfPlayer; i++) { // °¢ ÇÃ·¹ÀÌ¾îµé ÁÖ»çÀ§ ¼±ÅÃ
+			RenderPlayersState(player,map.size()); //í”Œë ˆì´ì–´ë“¤ ì •ë³´ ê°±ì‹  
+			for (int i = 0; i < numberOfPlayer; i++) { // ê° í”Œë ˆì´ì–´ë“¤ ì£¼ì‚¬ìœ„ ì„ íƒ
 				player[i].setDice(select(i, 2) - 1);
 			}
 
-			//ÃÊ¹İ ¼¼ÆÃ
+			//ì´ˆë°˜ ì„¸íŒ…
 			//RenderPlayersState(player);
 
-			// °ÔÀÓ ½ÃÀÛ
+			// ê²Œì„ ì‹œì‘
 
-			while (!somebodywin) { //´©±º°¡ ÀÌ±æ¶§±îÁö
+			while (!somebodywin) { //ëˆ„êµ°ê°€ ì´ê¸¸ë•Œê¹Œì§€
 				int vod = 0; //value of dice
-				//°ÔÀÓ¾À³ª¿À°í
-				// ¾ê³× ÇÃ·¹ÀÌ ÇÏ´Â ¸í¼ö¿¡ µû¶ó Æ÷¹® ¼³Á¤ÇØÁÖ±â
+				//ê²Œì„ì”¬ë‚˜ì˜¤ê³ 
+				// ì–˜ë„¤ í”Œë ˆì´ í•˜ëŠ” ëª…ìˆ˜ì— ë”°ë¼ í¬ë¬¸ ì„¤ì •í•´ì£¼ê¸°
 				for (int i = 0; i < numberOfPlayer; i++) {
-					RenderPlayersState(player, map.size()); //ÇÃ·¹ÀÌ¾îµé Á¤º¸ °»½Å 
+					RenderPlayersState(player, map.size()); //í”Œë ˆì´ì–´ë“¤ ì •ë³´ ê°±ì‹  
 					int ifUseItem = select(i, 3);
-					//´©±¸´©±¸Â÷·Ê y=1 erase, render
-					//Áö±İ ¹¹ÇÏ´ÂÁö y=2 erase,render 
-					if (ifUseItem == 2) {//¾ÆÀÌÅÛ ¼±ÅÃ //Áö±İ ¹¹ÇÏ´ÂÁö y=2 erase, render
-						player[i].setItemEffect(useItem(i, select(i, 4))); //¾ÆÀÌÅÛ ÀÌÆåÆ® ¹Ù²ñ select4 return 0 : ³ª°¡±â,¾ÆÀÌÅÛ ¾øÀ½  1 : ÁÖ»çÀ§ÁÖ»çÀ§ 3 : °¡º¸ÀÚ
+					//ëˆ„êµ¬ëˆ„êµ¬ì°¨ë¡€ y=1 erase, render
+					//ì§€ê¸ˆ ë­í•˜ëŠ”ì§€ y=2 erase,render 
+					if (ifUseItem == 2) {//ì•„ì´í…œ ì„ íƒ //ì§€ê¸ˆ ë­í•˜ëŠ”ì§€ y=2 erase, render
+						player[i].setItemEffect(useItem(i, select(i, 4))); //ì•„ì´í…œ ì´í™íŠ¸ ë°”ë€œ select4 return 0 : ë‚˜ê°€ê¸°,ì•„ì´í…œ ì—†ìŒ  1 : ì£¼ì‚¬ìœ„ì£¼ì‚¬ìœ„ 3 : ê°€ë³´ì
 
 					}
 					vod = rollDice(i);
 					gotoxy(31, 8);
-					//Áö±İ ¹¹ÇÏ´ÂÁö y=2 ÁÖ»çÀ§ ±¼¸®´ÂÁß erase, render
+					//ì§€ê¸ˆ ë­í•˜ëŠ”ì§€ y=2 ì£¼ì‚¬ìœ„ êµ´ë¦¬ëŠ”ì¤‘ erase, render
 					cout << "Dice : " << vod << endl;
 					Sleep(1000);
 					eraseInfoWindow(8);
 					if (player[i].getItemEffect() != 0) {
 						gotoxy(26, 9);
-						cout << "¾ÆÀÌÅÛ È¿°ú : " << player[i].getItemEffect();
+						cout << "ì•„ì´í…œ íš¨ê³¼ : " << player[i].getItemEffect();
 						vod += player[i].getItemEffect();
 						player[i].resetItemEffect();
 					}
 
-					player[i].setNowPosition(vod);// ÀÌµ¿
+					player[i].setNowPosition(vod);// ì´ë™
 					ErasePlayersState(player);
-					RenderPlayersState(player, map.size()); //ÀÌµ¿ÇÏ°í Á¤º¸ °»½Å 
+					RenderPlayersState(player, map.size()); //ì´ë™í•˜ê³  ì •ë³´ ê°±ì‹  
 
 					checkTile(i);
-					// y=2 °¡À§¹ÙÀ§º¸, ÄÚÀÎ ¾òÀ½, ÄÚÀÎ ÀÒÀ½,  È¦Â¦, ¾÷´Ù¿î , »ó Á¡  erase, render
+					// y=2 ê°€ìœ„ë°”ìœ„ë³´, ì½”ì¸ ì–»ìŒ, ì½”ì¸ ìƒìŒ,  í™€ì§, ì—…ë‹¤ìš´ , ìƒ ì   erase, render
 					Sleep(1000);
 
 					EraseChoiceScene();
@@ -101,15 +101,15 @@ void play()
 					EraseChoiceScene();
 					if (checkWin(i)) {
 						gotoxy(26, 6);
-						cout << "Player" << i + 1 << "½Â¸®";
+						cout << "Player" << i + 1 << "ìŠ¹ë¦¬";
 						Sleep(1000);
-						break; //¸¶Áö¸· Å¸ÀÏ µµÂøÇß´ÂÁö ÆÇº°ÇÏ°í ´ÙÀ½ »ç¶÷
+						break; //ë§ˆì§€ë§‰ íƒ€ì¼ ë„ì°©í–ˆëŠ”ì§€ íŒë³„í•˜ê³  ë‹¤ìŒ ì‚¬ëŒ
 					}
 				}
 
 			}
 			//cout<<"game over \n";
-			for (int i = 0; i < numberOfPlayer; i++) {//ÇÃ·¹ÀÌ¾î ¼ö ¸¸Å­ ÇÃ·¹ÀÌ¾î »ı¼º
+			for (int i = 0; i < numberOfPlayer; i++) {//í”Œë ˆì´ì–´ ìˆ˜ ë§Œí¼ í”Œë ˆì´ì–´ ìƒì„±
 				Player p(i);
 				player.pop_back();
 			}
@@ -129,26 +129,26 @@ bool checkWin(int playerNum) {
 
 int select(int playerNum, int k)
 {
-	if (k == 0) { //0: °ÔÀÓ ½ÃÀÛ return 1:°ÔÀÓ ½ÃÀÛ 2:°ÔÀÓ Á¾·á  
+	if (k == 0) { //0: ê²Œì„ ì‹œì‘ return 1:ê²Œì„ ì‹œì‘ 2:ê²Œì„ ì¢…ë£Œ  
 		RenderGameStartChoice();
 		return cursorControl(2);
 	}
-	else if (k == 1) { //1: ÇÃ·¹ÀÌ¾î ¼ö Á¤ÇÏ±â return : 2,3,4 
+	else if (k == 1) { //1: í”Œë ˆì´ì–´ ìˆ˜ ì •í•˜ê¸° return : 2,3,4 
 		RenderChoicePlayerNumTitle();
 		return updowncursorControl(2, 4);
 	}
-	else if (k == 2) { //2: ÁÖ»çÀ§ Á¾·ù Á¤ÇÏ±â return 1:ÀÏ¹İ 2:¾ÈÀü 3: °í¼ö 
+	else if (k == 2) { //2: ì£¼ì‚¬ìœ„ ì¢…ë¥˜ ì •í•˜ê¸° return 1:ì¼ë°˜ 2:ì•ˆì „ 3: ê³ ìˆ˜ 
 		RenderWhoseTurnTitle(playerNum);
 		RenderDiceChoice();
 		return cursorControl(3);
 	}
-	else if (k == 3) { //3: ÁÖ»çÀ§,¾ÆÀÌÅÛ °áÁ¤ return 1:¾ÆÀÌÅÛ »ç¿ë 2:ÁÖ»çÀ§ »ç¿ë 
+	else if (k == 3) { //3: ì£¼ì‚¬ìœ„,ì•„ì´í…œ ê²°ì • return 1:ì•„ì´í…œ ì‚¬ìš© 2:ì£¼ì‚¬ìœ„ ì‚¬ìš© 
 		RenderWhoseTurnTitle(playerNum);
 		RenderDiceItemChoice();
 		return cursorControl(2);
 	}
-	else if (k == 4) { //4: ¹«½¼ ¾ÆÀÌÅÛ¾µ°ÇÁö 0, 1 return 0 : ³ª°¡±â,¾ÆÀÌÅÛ ¾øÀ½  1 : ÁÖ»çÀ§ÁÖ»çÀ§ 3 : °¡º¸ÀÚ  
-		//°¡Áö°í ÀÖ´Â ¾ÆÀÌÅÛ º¸¿©ÁÖ±â
+	else if (k == 4) { //4: ë¬´ìŠ¨ ì•„ì´í…œì“¸ê±´ì§€ 0, 1 return 0 : ë‚˜ê°€ê¸°,ì•„ì´í…œ ì—†ìŒ  1 : ì£¼ì‚¬ìœ„ì£¼ì‚¬ìœ„ 3 : ê°€ë³´ì  
+		//ê°€ì§€ê³  ìˆëŠ” ì•„ì´í…œ ë³´ì—¬ì£¼ê¸°
 		RenderWhoseTurnTitle(playerNum);
 		RenderUseItemChoice(player[playerNum]);
 		int n = cursorControl(3);
@@ -156,40 +156,41 @@ int select(int playerNum, int k)
 			return 0;
 		}
 		else {
-			if (player[playerNum].getItem(n - 1) == 1) { //0 ¾øÀ½ 1°¡º¸ÀÚ 2 ²ÄÂ¦¸¶ 3 ÁÖÁÖ getItem(int x) x->¸î¹øÂ° ¾ÆÀÌÅÛ
+			if (player[playerNum].getItem(n - 1) == 1) { //0 ì—†ìŒ 1ê°€ë³´ì 2 ê¼¼ì§ë§ˆ 3 ì£¼ì£¼ getItem(int x) x->ëª‡ë²ˆì§¸ ì•„ì´í…œ
 				player[playerNum].setItem(n-1,0);
 				return 3;
 			}
-			else if (player[playerNum].getItem(n - 1) == 2) { //²ÄÂ¦¸¶
-				//pnum = ¸î¹øÂ° ÇÃ·¹ÀÌ¾î¿¡°Ô ²ÄÂ¦¸¶¸¦ ¸ÔÀÏ°ÇÁö 
+			else if (player[playerNum].getItem(n - 1) == 2) { //ê¼¼ì§ë§ˆ
+				//pnum = ëª‡ë²ˆì§¸ í”Œë ˆì´ì–´ì—ê²Œ ê¼¼ì§ë§ˆë¥¼ ë¨¹ì¼ê±´ì§€ 
 				player[playerNum].setItem(n - 1, 0);
 				return select(select(playerNum, 6), 10);
 			}
-			else if (player[playerNum].getItem(n - 1) == 3) {//ÁÖÁÖ
+			else if (player[playerNum].getItem(n - 1) == 3) {//ì£¼ì£¼
 				player[playerNum].setItem(n - 1, 0);
 				return 1;
 			}
-			else { //¾øÀ½
+			else { //ì—†ìŒ
 				return 0;
 			}
 		}
 	}
-	else if (k == 5) { //5: »óÁ¡¿¡¼­ ¹«½¼ ¾ÆÀÌÅÛ ±¸¸ÅÇÒ°ÇÁö return 1: °¡º¸ÀÚ 2: ²ÄÂ¦¸¶ 3: ÁÖ»çÀ§ÁÖ»çÀ§ 4: ³ª°¡ ±â  
+	else if (k == 5) { //5: ìƒì ì—ì„œ ë¬´ìŠ¨ ì•„ì´í…œ êµ¬ë§¤í• ê±´ì§€ return 1: ê°€ë³´ì 2: ê¼¼ì§ë§ˆ 3: ì£¼ì‚¬ìœ„ì£¼ì‚¬ìœ„ 4: ë‚˜ê°€ ê¸°  
 		RenderBuyItemChoice();
 		return cursorControl(4);
 	}
-	else if (k == 6) { //6: ¾î´À ÇÃ·¹ÀÌ¾î¿Í °ÔÀÓÇÒÁö return : »ó´ë¹æÀÇ ¹øÈ£(º¤ÅÍ»óÀÇ¹øÈ£) 
-		// ¸®ÅÏÀÌ -1ÀÌ¸é ³ª°¡±â ÇÑ°Í
-		int check = 0;//ÇÑ¸íÀÌ¶óµµ ¼±ÅÃÇßÀ¸¸é 1, Ã³À½¼±ÅÃÀÌ¸é 0
+	else if (k == 6) { //6: ì–´ëŠ í”Œë ˆì´ì–´ì™€ ê²Œì„í• ì§€ return : ìƒëŒ€ë°©ì˜ ë²ˆí˜¸(ë²¡í„°ìƒì˜ë²ˆí˜¸) 
+		// ë¦¬í„´ì´ -1ì´ë©´ ë‚˜ê°€ê¸° í•œê²ƒ
+		int check = 0;//í•œëª…ì´ë¼ë„ ì„ íƒí–ˆìœ¼ë©´ 1, ì²˜ìŒì„ íƒì´ë©´ 0
 		for (int i = 0; i < numberOfPlayer; i++) {
 			if (player[playerNum].getMinigameDid(i) == 1) check++;
 		}
 
 		RenderMinigamePlayerChoice(numberOfPlayer, player[playerNum], check);
-		int howManyChoose;
+		
+		int howManyChoose = numberOfPlayer - check;
 		if (check == 0)howManyChoose = numberOfPlayer - 1;
-		else howManyChoose = numberOfPlayer - check;
-		if (numberOfPlayer - howManyChoose == 1)return -1;
+
+		if (numberOfPlayer - check == 1)return -1;
 		int n = cursorControl(howManyChoose);
 		if (numberOfPlayer == 2) {
 			if (playerNum == 0)	return 1;
@@ -197,40 +198,38 @@ int select(int playerNum, int k)
 		}
 		else {
 			if (check != 0 && n == howManyChoose) return -1;
-			int temp = 0;
+			int temp = 1;
 			for (int i = 0; i < numberOfPlayer; i++) {
 				if (i!=playerNum && player[playerNum].getMinigameDid(i) == 0) {
-					temp++;
 					if (temp == n) {
 						return i;
 					}
+					temp++;
 				}
 			}
-			if (n > playerNum)	return n;
-			else return n - 1;
 		}
 
 
 	}
-	else if (k == 7) { //7: °¡À§¹ÙÀ§º¸ Á¤ÇÏ±â	return 1:°¡À§ 2:¹ÙÀ§ 3: º¸  
+	else if (k == 7) { //7: ê°€ìœ„ë°”ìœ„ë³´ ì •í•˜ê¸°	return 1:ê°€ìœ„ 2:ë°”ìœ„ 3: ë³´  
 		RenderRSPChoice();
 		return cursorControl(3);
 	}
-	else if (k == 8) { //8: ¾÷´Ù¿î Á¤ÇÏ±â return 1~10
+	else if (k == 8) { //8: ì—…ë‹¤ìš´ ì •í•˜ê¸° return 1~10
 		return updowncursorControl(1, 10);
 	}
-	else if (k == 9) { //9: È¦Â¦ Á¤ÇÏ±â return 1:È¦ 2:Â¦ 
+	else if (k == 9) { //9: í™€ì§ ì •í•˜ê¸° return 1:í™€ 2:ì§ 
 		RenderEQChoice();
 		return cursorControl(2);
 	}
-	else if (k == 10) { //10: ²ÄÂ¦¸¶ »ó´ë Á¤ÇÏ±â return  
+	else if (k == 10) { //10: ê¼¼ì§ë§ˆ ìƒëŒ€ ì •í•˜ê¸° return  
 		//RenderMinigamePlayerChoice(numberOfPlayer, player[playerNum]);
 		player[playerNum].setItemEffect(-3);
 		return 0;
 	}
 }
 
-int cursorControl(int numberOfIndex) //¼±ÅÃÁö °³ ¼ö  
+int cursorControl(int numberOfIndex) //ì„ íƒì§€ ê°œ ìˆ˜  
 {
 	int nowpos = 1;
 	int min = 1;
@@ -318,17 +317,17 @@ void checkTile(int playerNum) {
 	EraseChoiceScene();
 	gotoxy(28, 4);
 	cout << "Player" << playerNum + 1;
-	if (map[pos] == 0) { //¾ÕÀ¸·Î 3Ä­
+	if (map[pos] == 0) { //ì•ìœ¼ë¡œ 3ì¹¸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(3);
 		checkTile(playerNum);
 	}
-	else if (map[pos] == 1) { //µÚ·Î 3Ä­
+	else if (map[pos] == 1) { //ë’¤ë¡œ 3ì¹¸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(-3);
 		checkTile(playerNum);
 	}
-	else if (map[pos] == 2) { //»óÁ¡
+	else if (map[pos] == 2) { //ìƒì 
 		RenderAct(map[pos]);
 		shopping(playerNum);
 	}
@@ -363,102 +362,119 @@ void shopping(int playerNum) {
 	EraseChoiceScene();
 	//cout<<"shopping \n";
 	player[playerNum].setshopCnt();
-	//1. °¡º¸ÀÚ (3) 2. ²ÄÂ¦¸¶ (3) 3. ÁÖÁÖ (5) 4. ³ª°¡±â
-	int selectnum = select(playerNum, 5); //select¿¡¼­ ¹«½¼¾ÆÀÌÅÛ »ì°ÇÁö ¹øÈ£ return
+	//1. ê°€ë³´ì (3) 2. ê¼¼ì§ë§ˆ (3) 3. ì£¼ì£¼ (5) 4. ë‚˜ê°€ê¸°
+	int selectnum = select(playerNum, 5); //selectì—ì„œ ë¬´ìŠ¨ì•„ì´í…œ ì‚´ê±´ì§€ ë²ˆí˜¸ return
 	if ((selectnum == 1 || selectnum == 2) && player[playerNum].getCoin() >= 3 && player[playerNum].isItemEmpty() != -1) {
 		player[playerNum].setCoin(-3);
 		player[playerNum].setItem(player[playerNum].isItemEmpty(), selectnum);
 		gotoxy(28, 8);
-		cout<< " ±¸¸Å¿Ï·á \n";
+		cout<< " êµ¬ë§¤ì™„ë£Œ \n";
 	}
 	else if (selectnum == 3 && player[playerNum].getCoin() >= 5 && player[playerNum].isItemEmpty() != -1) {
 		player[playerNum].setCoin(-5);
 		player[playerNum].setItem(player[playerNum].isItemEmpty(), selectnum);
 		gotoxy(28, 8);
-		cout << "±¸¸Å¿Ï·á \n";
+		cout << "êµ¬ë§¤ì™„ë£Œ \n";
 	}
 	else {
 		return;
 	}
 }
 
-void miniGame(int playerNum, int typeOfGame) {// ¸®ÅÏ°ªÀÌ ÀÌ±ä»ç¶÷ playerNum	
+void miniGame(int playerNum, int typeOfGame) {// ë¦¬í„´ê°’ì´ ì´ê¸´ì‚¬ëŒ playerNum
 	EraseChoiceScene();
+	
+	int check = 0;//í•œëª…ì´ë¼ë„ ì„ íƒí–ˆìœ¼ë©´ 1, ì²˜ìŒì„ íƒì´ë©´ 0
+	for (int i = 0; i < numberOfPlayer; i++) {
+		if (player[playerNum].getMinigameDid(i) == 1) check++;
+	}
+	int howManyChoose = numberOfPlayer - check;
+	if (check == 0)howManyChoose = numberOfPlayer - 1;
+	if (numberOfPlayer - check == 1)return;
+
+	
 	int n;
-	if (typeOfGame == 3) { //°¡À§¹ÙÀ§º¸	
+	if (typeOfGame == 3) { //ê°€ìœ„ë°”ìœ„ë³´	
 		RenderAct(typeOfGame);
 
 		n = select(playerNum, 6);
-		//TODO
-		EraseChoiceScene();
-		checkRSP(playerNum, n);
+		player[playerNum].setMinigameDid(n);
+
 		if (n == -1) {
 			player[playerNum].resetMinigameDid();
 			return;
 		}
+		//TODO
+		EraseChoiceScene();
+		checkRSP(playerNum, n);
+		
 		miniGame(playerNum, 3);
 
-		//if (winner == n) { //Á³À½
+		//if (winner == n) { //ì¡ŒìŒ
 		//	EraseChoiceScene();
 		//	gotoxy(28, 6);
-		//	cout << "player" << n + 1 << " ½Â¸®";
+		//	cout << "player" << n + 1 << " ìŠ¹ë¦¬";
 		//	gotoxy(23, 7);
-		//	cout << "Player" << winner + 1 << " " <<"5 ÄÚÀÎ È¹µæ! ";
+		//	cout << "Player" << winner + 1 << " " <<"5 ì½”ì¸ íšë“! ";
 		//	gotoxy(23, 8);
-		//	cout << "Player" << playerNum + 1 << " " << "5 ÄÚÀÎ ¾Ğ¼ö ! ";
+		//	cout << "Player" << playerNum + 1 << " " << "5 ì½”ì¸ ì••ìˆ˜ ! ";
 		//	Sleep(1000);
 		//	player[winner].setCoin(5);
 		//	player[playerNum].setCoin(-5);
 		//}
-		//else if (winner == playerNum) { //ÀÌ°åÀ½
+		//else if (winner == playerNum) { //ì´ê²¼ìŒ
 		//	EraseChoiceScene();
 		//	gotoxy(28, 6);
-		//	cout << "player" << n + 1 << " ½Â¸®";
+		//	cout << "player" << n + 1 << " ìŠ¹ë¦¬";
 		//	gotoxy(23, 7);
-		//	cout << "Player" << winner + 1 << " " << "5 ÄÚÀÎ È¹µæ! ";
+		//	cout << "Player" << winner + 1 << " " << "5 ì½”ì¸ íšë“! ";
 		//	gotoxy(23, 8);
-		//	cout << "Player" << n + 1 << " " << "5 ÄÚÀÎ ¾Ğ¼ö ! ";
+		//	cout << "Player" << n + 1 << " " << "5 ì½”ì¸ ì••ìˆ˜ ! ";
 		//	Sleep(1000);
 		//	player[winner].setCoin(5);
 		//	player[n].setCoin(-5);
 		//}
-		//else { //ºñ°åÀ½
+		//else { //ë¹„ê²¼ìŒ
 		//	EraseChoiceScene();
 		//	gotoxy(28, 6);
-		//	cout << "ºñ°å½À´Ï´Ù" << endl;
+		//	cout << "ë¹„ê²¼ìŠµë‹ˆë‹¤" << endl;
 		//	Sleep(1000);
 		//}
 	}
-	else if (typeOfGame == 4) { //¾÷´Ù¿î
+	else if (typeOfGame == 4) { //ì—…ë‹¤ìš´
 		RenderAct(typeOfGame);
 		n = select(playerNum, 6);
+		player[playerNum].setMinigameDid(n);
+		if (n == -1) {
+			player[playerNum].resetMinigameDid();
+			return;
+		}
+		EraseChoiceScene();
 		int tk = checkUpDown(playerNum, n) * 3; //2 1 0 -1
 		player[playerNum].setCoin(tk);
 		player[n].setCoin(-tk);
+		miniGame(playerNum, 4);
+	}
+	else if (typeOfGame == 5) { //í™€ì§
+		RenderAct(typeOfGame);
+		n = select(playerNum, 6);
+		player[playerNum].setMinigameDid(n);
 		if (n == -1) {
 			player[playerNum].resetMinigameDid();
 			return;
 		}
-		miniGame(playerNum, 4);
-	}
-	else if (typeOfGame == 5) { //È¦Â¦
-		RenderAct(typeOfGame);
-		n = select(playerNum, 6);
+		EraseChoiceScene();
 		int tk = checkEQ(playerNum, n - 1); //5 -5
 		player[playerNum].setCoin(tk);
 		player[n].setCoin(-tk);
-		if (n == -1) {
-			player[playerNum].resetMinigameDid();
-			return;
-		}
 		miniGame(playerNum, 5);
 	}
 }
 
 int checkUpDown(int playerNum, int otherNum) {
-	//»ó´ë¹æÀÌ ¼ıÀÚ °ñ¶ó 1~10
+	//ìƒëŒ€ë°©ì´ ìˆ«ì ê³¨ë¼ 1~10
 	gotoxy(26, 4);
-	cout <<"Player"<< otherNum + 1 << "¼ıÀÚ ÁöÁ¤";
+	cout <<"Player"<< otherNum + 1 << "ìˆ«ì ì§€ì •";
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
@@ -466,18 +482,18 @@ int checkUpDown(int playerNum, int otherNum) {
 		cout << playerNum + 1 << " player(Life:"<<2-i<<")";
 		x = select(playerNum, 8);
 		if (num == x) {
-			//std::cout<<i+1<<"Æ® win \n";
+			//std::cout<<i+1<<"íŠ¸ win \n";
 			EraseChoiceScene();
 			gotoxy(23, 4);
 			cout << "Correct!";
 			gotoxy(23, 5);
-			cout << "Player" << otherNum + 1 << "ÀÌ Á¤ÇÑ ¼ıÀÚ:" << num;
+			cout << "Player" << otherNum + 1 << "ì´ ì •í•œ ìˆ«ì:" << num;
 			gotoxy(26, 6);
-			cout << "Player" << playerNum + 1 << "ÀÇ ½Â¸®";
+			cout << "Player" << playerNum + 1 << "ì˜ ìŠ¹ë¦¬";
 			gotoxy(23, 7);
-			cout << "Player" << playerNum + 1 <<" "<< 3*(2-i) << "ÄÚÀÎ È¹µæ! ";
+			cout << "Player" << playerNum + 1 <<" "<< 3*(2-i) << "ì½”ì¸ íšë“! ";
 			gotoxy(23, 8);
-			cout << "Player" << otherNum + 1 << " " << 3 * (2 - i) << "ÄÚÀÎ ¾Ğ¼ö ! ";
+			cout << "Player" << otherNum + 1 << " " << 3 * (2 - i) << "ì½”ì¸ ì••ìˆ˜ ! ";
 			Sleep(1000);
 			EraseChoiceScene();
 			return 2 - i;
@@ -500,12 +516,12 @@ int checkUpDown(int playerNum, int otherNum) {
 		}
 	}
 	gotoxy(25, 8);
-	cout << "¸ÂÃßÁö ¸øÇß½À´Ï´Ù";
+	cout << "ë§ì¶”ì§€ ëª»í–ˆìŠµë‹ˆë‹¤";
 	return -1;
 }
 
 int checkEQ(int playerNum, int otherNum) {
-	//»ó´ë¹æÀÌ ¼ıÀÚ °ñ¶ó 1~10
+	//ìƒëŒ€ë°©ì´ ìˆ«ì ê³¨ë¼ 1~10
 	EraseChoiceScene();
 	gotoxy(23, 4);
 	cout << "Player" << otherNum + 1;
@@ -520,13 +536,13 @@ int checkEQ(int playerNum, int otherNum) {
 		gotoxy(32, 4);
 		cout << "Win!";
 		gotoxy(23, 5);
-		cout << "Player" << otherNum + 1 << "ÀÌ Á¤ÇÑ ¼ıÀÚ:" << num;
+		cout << "Player" << otherNum + 1 << "ì´ ì •í•œ ìˆ«ì:" << num;
 		gotoxy(23, 6);
-		cout << "Player" << playerNum + 1 << "ÀÇ ½Â¸®";
+		cout << "Player" << playerNum + 1 << "ì˜ ìŠ¹ë¦¬";
 		gotoxy(23, 7);
-		cout << "Player" << playerNum + 1 << " " << "5 ÄÚÀÎ È¹µæ! ";
+		cout << "Player" << playerNum + 1 << " " << "5 ì½”ì¸ íšë“! ";
 		gotoxy(23, 8);
-		cout << "Player" << otherNum + 1 << " " << "5 ÄÚÀÎ ¾Ğ¼ö ! ";
+		cout << "Player" << otherNum + 1 << " " << "5 ì½”ì¸ ì••ìˆ˜ ! ";
 		Sleep(1000);
 		EraseChoiceScene();
 		return 5;
@@ -536,20 +552,20 @@ int checkEQ(int playerNum, int otherNum) {
 		gotoxy(32, 4);
 		cout << "Lose";
 		gotoxy(23, 5);
-		cout << "Player" << otherNum + 1 << "ÀÌ Á¤ÇÑ ¼ıÀÚ:" << num;
+		cout << "Player" << otherNum + 1 << "ì´ ì •í•œ ìˆ«ì:" << num;
 		gotoxy(23, 6);
-		cout << "Player" << otherNum + 1 << "ÀÇ ½Â¸®";
+		cout << "Player" << otherNum + 1 << "ì˜ ìŠ¹ë¦¬";
 		gotoxy(23, 7);
-		cout << "Player" << playerNum + 1 << " " << "5 ÄÚÀÎ ¾Ğ¼ö! ";
+		cout << "Player" << playerNum + 1 << " " << "5 ì½”ì¸ ì••ìˆ˜! ";
 		gotoxy(23, 8);
-		cout << "Player" << otherNum + 1 << " " << "5 ÄÚÀÎ È¹µæ ! ";
+		cout << "Player" << otherNum + 1 << " " << "5 ì½”ì¸ íšë“ ! ";
 		Sleep(1000);
 		EraseChoiceScene();
 		return -5;
 	}
 }
 
-void checkRSP(int playerNum, int otherNum) { //return -1 ÀÌ¸é ºñ±è  °¡À§ ¹ÙÀ§ º¸ ¹ÙÀ§ °¡À§  º¸ 
+void checkRSP(int playerNum, int otherNum) { //return -1 ì´ë©´ ë¹„ê¹€  ê°€ìœ„ ë°”ìœ„ ë³´ ë°”ìœ„ ê°€ìœ„  ë³´ 
 	gotoxy(32, 4);
 	cout << "Player" << playerNum + 1;
 	int pnum = RSP(playerNum);
@@ -557,13 +573,13 @@ void checkRSP(int playerNum, int otherNum) { //return -1 ÀÌ¸é ºñ±è  °¡À§ ¹ÙÀ§ º¸
 	cout << "Player" << otherNum + 1;
 	int onum = RSP(otherNum);
 	string pc, oc;
-	if (pnum == 1)	pc = "°¡À§";
-	else if (pnum == 2)	pc = "¹ÙÀ§";
-	else if (pnum == 3)	pc = " º¸";
+	if (pnum == 1)	pc = "ê°€ìœ„";
+	else if (pnum == 2)	pc = "ë°”ìœ„";
+	else if (pnum == 3)	pc = " ë³´";
 
-	if (onum == 1)	oc = "°¡À§";
-	else if (onum == 2)	oc = "¹ÙÀ§";
-	else if (onum == 3)	oc = " º¸";
+	if (onum == 1)	oc = "ê°€ìœ„";
+	else if (onum == 2)	oc = "ë°”ìœ„";
+	else if (onum == 3)	oc = " ë³´";
 
 	if ((pnum == 1 && onum == 2) || (pnum == 2 && onum == 3) || (pnum == 3 && onum == 1)) {
 		EraseChoiceScene();
@@ -572,15 +588,15 @@ void checkRSP(int playerNum, int otherNum) { //return -1 ÀÌ¸é ºñ±è  °¡À§ ¹ÙÀ§ º¸
 		gotoxy(28, 5);
 		cout << "Player" << otherNum + 1 << " " << oc;
 		gotoxy(28, 6);
-		cout << "Player" << otherNum + 1 << " ½Â¸®";
+		cout << "Player" << otherNum + 1 << " ìŠ¹ë¦¬";
 		gotoxy(23, 7);
-		cout << "Player" << otherNum + 1 << " " << "5 ÄÚÀÎ È¹µæ! ";
+		cout << "Player" << otherNum + 1 << " " << "5 ì½”ì¸ íšë“! ";
 		gotoxy(23, 8);
-		cout << "Player" << playerNum + 1 << " " << "5 ÄÚÀÎ ¾Ğ¼ö ! ";
+		cout << "Player" << playerNum + 1 << " " << "5 ì½”ì¸ ì••ìˆ˜ ! ";
 		Sleep(1000);
 		player[otherNum].setCoin(5);
 		player[playerNum].setCoin(-5);
-	} //Áø°Å
+	} //ì§„ê±°
 	if ((pnum == 1 && onum == 3) || (pnum == 2 && onum == 1) || (pnum == 3 && onum == 2)) {
 		EraseChoiceScene();
 		gotoxy(28, 4);
@@ -588,11 +604,11 @@ void checkRSP(int playerNum, int otherNum) { //return -1 ÀÌ¸é ºñ±è  °¡À§ ¹ÙÀ§ º¸
 		gotoxy(28, 5);
 		cout << "Player" << otherNum + 1 << " " << oc;
 		gotoxy(28, 6);
-		cout << "Player" << playerNum + 1 << " ½Â¸®";
+		cout << "Player" << playerNum + 1 << " ìŠ¹ë¦¬";
 		gotoxy(23, 7);
-		cout << "Player" << playerNum + 1 << " " << "5 ÄÚÀÎ È¹µæ! ";
+		cout << "Player" << playerNum + 1 << " " << "5 ì½”ì¸ íšë“! ";
 		gotoxy(23, 8);
-		cout << "Player" << otherNum + 1 << " " << "5 ÄÚÀÎ ¾Ğ¼ö ! ";
+		cout << "Player" << otherNum + 1 << " " << "5 ì½”ì¸ ì••ìˆ˜ ! ";
 		Sleep(1000);
 		player[playerNum].setCoin(5);
 		player[otherNum].setCoin(-5);
@@ -604,9 +620,9 @@ void checkRSP(int playerNum, int otherNum) { //return -1 ÀÌ¸é ºñ±è  °¡À§ ¹ÙÀ§ º¸
 		gotoxy(28, 5);
 		cout << "Player" << otherNum + 1 << " " << oc;
 		gotoxy(26, 6);
-		cout << "°¡À§¹ÙÀ§º¸ ¹«½ÂºÎ";
+		cout << "ê°€ìœ„ë°”ìœ„ë³´ ë¬´ìŠ¹ë¶€";
 		gotoxy(26, 7);
-		cout << "¾Æ¹«ÀÏµµ ¾ø¾ú´Ù";
+		cout << "ì•„ë¬´ì¼ë„ ì—†ì—ˆë‹¤";
 		Sleep(1000);
 	}
 }
@@ -615,13 +631,13 @@ int RSP(int playerNum) {
 	return select(playerNum, 7);
 }
 
-int useItem(int playerNum, int vod) { // select4 return 0 : ³ª°¡±â,¾ÆÀÌÅÛ ¾øÀ½  1 : ÁÖ»çÀ§ÁÖ»çÀ§ 3 : °¡º¸ÀÚ
-	// ¾ÆÀÌÅÛÀÌÆåÆ® °¡º¸ÀÚ	3
-	// ¾ÆÀÌÅÛÀÌÆåÆ® ²ÄÂ¦¸¶ -3
-	// ¾ÆÀÌÅÛÀÌÆåÆ® ÁÖ»çÀ§ÁÖ»çÀ§ 1
-	// ¾ÆÀÌÅÛÀÌÆåÆ® È¿°ú ¾øÀ½ 0
-	//¹«½¼ ¾ÆÀÌÅÛ ¾µ°ÇÁö È®ÀÎÇÏ°í ½ÇÇà±îÁö ÇØÁà¾ßÇÔ
-	if (vod == 1) //ÁÖÁÖ 
+int useItem(int playerNum, int vod) { // select4 return 0 : ë‚˜ê°€ê¸°,ì•„ì´í…œ ì—†ìŒ  1 : ì£¼ì‚¬ìœ„ì£¼ì‚¬ìœ„ 3 : ê°€ë³´ì
+	// ì•„ì´í…œì´í™íŠ¸ ê°€ë³´ì	3
+	// ì•„ì´í…œì´í™íŠ¸ ê¼¼ì§ë§ˆ -3
+	// ì•„ì´í…œì´í™íŠ¸ ì£¼ì‚¬ìœ„ì£¼ì‚¬ìœ„ 1
+	// ì•„ì´í…œì´í™íŠ¸ íš¨ê³¼ ì—†ìŒ 0
+	//ë¬´ìŠ¨ ì•„ì´í…œ ì“¸ê±´ì§€ í™•ì¸í•˜ê³  ì‹¤í–‰ê¹Œì§€ í•´ì¤˜ì•¼í•¨
+	if (vod == 1) //ì£¼ì£¼ 
 		return rollDice(playerNum);
 	else
 		return vod;
@@ -641,7 +657,7 @@ bool readMap(string mapName)
 			if (num == 2) {
 				if (n == 2) {
 					gotoxy(20, 9);
-					cout << "»óÁ¡Àº 2°³ÀÌ»óÀÌ¸é ¾ÈµË´Ï´Ù.";
+					cout << "ìƒì ì€ 2ê°œì´ìƒì´ë©´ ì•ˆë©ë‹ˆë‹¤.";
 					Sleep(1000);
 					return false;
 				}
@@ -659,14 +675,14 @@ void findMap() {
 	int k = 3;
 	struct _finddata_t fd;
 	gotoxy(31, 1);
-	cout << "¸Ê ¼±ÅÃ";
+	cout << "ë§µ ì„ íƒ";
 	intptr_t handle;
 
 	if ((handle = _findfirst(path.c_str(), &fd)) == -1L)
 	{
 
 		cout << "No file in directory!" << endl;
-		// ÆÄÀÏÀÌ ¾øÀ»°æ¿ì ¹ß»ı½ÃÅ³ ÀÌº¥Æ®.
+		// íŒŒì¼ì´ ì—†ì„ê²½ìš° ë°œìƒì‹œí‚¬ ì´ë²¤íŠ¸.
 	}
 	do
 	{
@@ -722,10 +738,10 @@ bool ChoiceMap() {
 int rollDice(int playerNum) {
 	srand((unsigned int)time(NULL));
 	int typeOfDice = player[playerNum].getDice();
-	if (typeOfDice == 0) { //ÀÏ¹İ 
+	if (typeOfDice == 0) { //ì¼ë°˜ 
 		return (rand() % 6) + 1;
 	}
-	else if (typeOfDice == 1) {//¾ÈÀü 2 3 3 4 4 5
+	else if (typeOfDice == 1) {//ì•ˆì „ 2 3 3 4 4 5
 		int vod = (rand() % 6) + 1;
 		if (vod == 1)
 			return 3;
@@ -734,7 +750,7 @@ int rollDice(int playerNum) {
 		else
 			return vod;
 	}
-	else { //°í¼ö
+	else { //ê³ ìˆ˜
 		if ((rand() % 2) == 0)
 			return 1;
 		else
