@@ -1,4 +1,4 @@
-#include "Play.h"
+﻿#include "Play.h"
 
 #define Max 2,147,483,647
 
@@ -474,7 +474,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playe
 int checkUpDown(int playerNum, int otherNum) {
 	//상대방이 숫자 골라 1~10
 	gotoxy(26, 4);
-	cout <<"Player"<< otherNum + 1 << "숫자 지정";
+	cout << "Player" << otherNum + 1 << "숫자 지정";
 	int num = select(otherNum, 8);
 	int x = 0;
 	for (int i = 0; i < 3; i++) {
