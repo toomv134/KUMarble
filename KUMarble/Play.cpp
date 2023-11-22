@@ -119,7 +119,7 @@ void play()
 }
 
 bool checkWin(int playerNum) {
-	if (player[playerNum].getNowPosition() >= 26) {
+	if (player[playerNum].getNowPosition() >= map.size()) {
 		//cout<<"player "<<playerNum + 1<<" Win!! \n";
 		somebodywin = true;
 		return true;
@@ -656,15 +656,27 @@ bool readMap(string mapName)
 			map.push_back(num);
 			if (num == 2) {
 				if (n == 2) {
-					gotoxy(20, 9);
-					cout << "상점은 2개이상이면 안됩니다.";
+					gotoxy(22, 9);
+					cout << "상점은 2개이어야 합니다.";
 					Sleep(1000);
 					return false;
 				}
 				shop[n++] = i;
 			}
+			else if (num < 0 || num>7) {
+				gotoxy(18, 9);
+				cout << "유효하지 않은 타일이 존재합니다.";
+				Sleep(1000);
+				return false;
+			}
 			i++;
 		}
+	}
+	if (n < 2) {
+		gotoxy(20, 9);
+		cout << "상점은 2개이어야 합니다.";
+		Sleep(1000);
+		return false;
 	}
 	return true;
 }
