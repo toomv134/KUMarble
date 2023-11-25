@@ -138,6 +138,7 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="55522.txt" />
     <Text Include="map.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

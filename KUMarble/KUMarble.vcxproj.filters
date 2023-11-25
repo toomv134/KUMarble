@@ -43,5 +43,6 @@
     <Text Include="map.txt">
       <Filter>소스 파일</Filter>
     </Text>
+    <Text Include="55522.txt" />
   </ItemGroup>
 </Project>
