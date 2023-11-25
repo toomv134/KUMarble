@@ -128,13 +128,15 @@ bool checkWin(int playerNum) {
 		somebodywin = true;
 		return true;
 	}
-	if (player[playerNum].getNowPosition() >= 30) {
-		system("cls");
-		gotoxy(26, 6);
-		cout << "plaer " << checkwhowin() << "win!!";
-		Sleep(1000);
-		somebodywin = true;
-		return true;
+	if (map.size() > 50){
+		if (player[playerNum].getNowPosition() >= map.size() * 0.6) {
+			system("cls");
+			gotoxy(26, 6);
+			cout << "plaer " << checkwhowin() << "win!!";
+			Sleep(1000);
+			somebodywin = true;
+			return true;
+		}
 	}
 	return false;
 }
