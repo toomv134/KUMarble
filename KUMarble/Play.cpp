@@ -418,13 +418,16 @@ void shopping(int playerNum) {
 void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playerNum
 	EraseChoiceScene();
 	
-	int check = 0;//한명이라도 선택했으면 1, 처음선택이면 0
+	int check = 0;// 처음선택이면 0
 	for (int i = 0; i < numberOfPlayer; i++) {
 		if (player[playerNum].getMinigameDid(i) == 1) check++;
 	}
 	int howManyChoose = numberOfPlayer - check;
 	if (check == 0)howManyChoose = numberOfPlayer - 1;
-	if (numberOfPlayer - check == 1)return;
+	if (numberOfPlayer - check == 1) {
+		player[playerNum].resetMinigameDid();
+		return;
+	}
 
 	
 	int n;
