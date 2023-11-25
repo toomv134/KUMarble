@@ -346,8 +346,9 @@ int updowncursorControl(int min, int max) {
 
 void checkTile(int playerNum) {
 	//cout<<"position: "<<player[playerNum].getNowPosition()<<"\n";
+
 	int pos = player[playerNum].getNowPosition();
-	if (pos >= 26)return;
+	if (pos >= map.size()) return;
 	EraseChoiceScene();
 	gotoxy(28, 4);
 	cout << "Player" << playerNum + 1;
