@@ -77,7 +77,12 @@ void play()
 					gotoxy(31, 8);
 					//지금 뭐하는지 y=2 주사위 굴리는중 erase, render
 					cout << "Dice : " << vod << endl;
-					Sleep(1000);
+					while (1) {
+						int input = 0;
+						input = _getch();
+						if (input == 13)	break;
+					}
+					//Sleep(1000);
 					eraseInfoWindow(8);
 					if (player[i].getItemEffect() != 0) {
 						gotoxy(26, 9);
@@ -92,7 +97,12 @@ void play()
 
 					checkTile(i);
 					// y=2 가위바위보, 코인 얻음, 코인 잃음,  홀짝, 업다운 , 상 점  erase, render
-					Sleep(1000);
+					//Sleep(1000);
+					while (1) {
+						int input = 0;
+						input = _getch();
+						if (input == 13)	break;
+					}
 
 					EraseChoiceScene();
 					checkShop(i);
@@ -124,7 +134,12 @@ bool checkWin(int playerNum) {
 		system("cls");
 		gotoxy(26, 6);
 		cout<<"player "<<playerNum + 1<<" Win!! \n";
-		Sleep(1000);
+//		Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		somebodywin = true;
 		return true;
 	}
@@ -133,7 +148,12 @@ bool checkWin(int playerNum) {
 			system("cls");
 			gotoxy(26, 6);
 			cout << "plaer " << checkwhowin() << "win!!";
-			Sleep(1000);
+			//Sleep(1000);
+			while (1) {
+				int input = 0;
+				input = _getch();
+				if (input == 13)	break;
+			}
 			somebodywin = true;
 			return true;
 		}
@@ -508,7 +528,12 @@ int checkUpDown(int playerNum, int otherNum) {
 			cout << "Player" << playerNum + 1 <<" "<< 3*(2-i) << "코인 획득! ";
 			gotoxy(23, 8);
 			cout << "Player" << otherNum + 1 << " " << 3 * (2 - i) << "코인 압수 ! ";
-			Sleep(1000);
+			//Sleep(1000);
+			while (1) {
+				int input = 0;
+				input = _getch();
+				if (input == 13)	break;
+			}
 			EraseChoiceScene();
 			return 2 - i;
 		}
@@ -517,7 +542,12 @@ int checkUpDown(int playerNum, int otherNum) {
 			cout << playerNum + 1 << " player(Life:" << 2 - i << ")";
 			gotoxy(33, 8);
 			cout << "Up";
-			Sleep(1000);
+			//Sleep(1000);
+			while (1) {
+				int input = 0;
+				input = _getch();
+				if (input == 13)	break;
+			}
 			EraseChoiceScene();
 		}
 		else {
@@ -525,7 +555,12 @@ int checkUpDown(int playerNum, int otherNum) {
 			cout << playerNum + 1 << " player(Life:" << 2 - i << ")";
 			gotoxy(32, 8);
 			cout << "Down";
-			Sleep(1000);
+			//Sleep(1000);
+			while (1) {
+				int input = 0;
+				input = _getch();
+				if (input == 13)	break;
+			}
 			EraseChoiceScene();
 		}
 	}
@@ -557,7 +592,12 @@ int checkEQ(int playerNum, int otherNum) {
 		cout << "Player" << playerNum + 1 << " " << "5 코인 획득! ";
 		gotoxy(23, 8);
 		cout << "Player" << otherNum + 1 << " " << "5 코인 압수 ! ";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 		return 5;
 	}
@@ -573,7 +613,12 @@ int checkEQ(int playerNum, int otherNum) {
 		cout << "Player" << playerNum + 1 << " " << "5 코인 압수! ";
 		gotoxy(23, 8);
 		cout << "Player" << otherNum + 1 << " " << "5 코인 획득 ! ";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 		return -5;
 	}
@@ -607,7 +652,12 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 �
 		cout << "Player" << otherNum + 1 << " " << "5 코인 획득! ";
 		gotoxy(23, 8);
 		cout << "Player" << playerNum + 1 << " " << "5 코인 압수 ! ";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		player[otherNum].setCoin(5);
 		player[playerNum].setCoin(-5);
 	} //진거
@@ -623,7 +673,12 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 �
 		cout << "Player" << playerNum + 1 << " " << "5 코인 획득! ";
 		gotoxy(23, 8);
 		cout << "Player" << otherNum + 1 << " " << "5 코인 압수 ! ";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		player[playerNum].setCoin(5);
 		player[otherNum].setCoin(-5);
 	}
@@ -637,7 +692,12 @@ void checkRSP(int playerNum, int otherNum) { //return -1 이면 비김  가위 �
 		cout << "가위바위보 무승부";
 		gotoxy(26, 7);
 		cout << "아무일도 없었다";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 	}
 }
 
@@ -672,7 +732,12 @@ bool readMap(string mapName)
 				if (n == 2) {
 					gotoxy(22, 9);
 					cout << "상점은 2개이어야 합니다.";
-					Sleep(1000);
+					//Sleep(1000);
+					while (1) {
+						int input = 0;
+						input = _getch();
+						if (input == 13)	break;
+					}
 					return false;
 				}
 				shop[n++] = i;
@@ -680,7 +745,12 @@ bool readMap(string mapName)
 			else if (num < 0 || num>7) {
 				gotoxy(18, 9);
 				cout << "유효하지 않은 타일이 존재합니다.";
-				Sleep(1000);
+				//Sleep(1000);
+				while (1) {
+					int input = 0;
+					input = _getch();
+					if (input == 13)	break;
+				}
 				return false;
 			}
 			i++;
@@ -689,7 +759,12 @@ bool readMap(string mapName)
 	if (n < 2) {
 		gotoxy(20, 9);
 		cout << "상점은 2개이어야 합니다.";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		return false;
 	}
 	return true;
