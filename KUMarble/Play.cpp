@@ -100,9 +100,9 @@ void play()
 					ErasePlayersState(player);
 					EraseChoiceScene();
 					if (checkWin(i)) {
-						gotoxy(26, 6);
-						cout << "Player" << i + 1 << "승리";
-						Sleep(1000);
+						//gotoxy(26, 6);
+						//cout << "Player" << i + 1 << "승리";
+						//Sleep(1000);
 						break; //마지막 타일 도착했는지 판별하고 다음 사람
 					}
 				}
@@ -119,8 +119,20 @@ void play()
 }
 
 bool checkWin(int playerNum) {
+
 	if (player[playerNum].getNowPosition() >= map.size()) {
-		//cout<<"player "<<playerNum + 1<<" Win!! \n";
+		system("cls");
+		gotoxy(26, 6);
+		cout<<"player "<<playerNum + 1<<" Win!! \n";
+		Sleep(1000);
+		somebodywin = true;
+		return true;
+	}
+	if (player[playerNum].getNowPosition() >= 30) {
+		system("cls");
+		gotoxy(26, 6);
+		cout << "plaer " << checkwhowin() << "win!!";
+		Sleep(1000);
 		somebodywin = true;
 		return true;
 	}
@@ -747,6 +759,20 @@ bool ChoiceMap() {
 	findMap();
 	return readMap(mapName[CursorMapChoice()]);
 }
+
+int checkwhowin() {
+	int max = -500;
+	int whowin = 0;
+	for (int i = 0; i < player.size(); i++) {
+		if (max < player[i].getCoin() + player[i].getNowPosition()) {
+			whowin = i + 1;
+		}
+	}
+	return whowin;
+}
+
+
+
 int rollDice(int playerNum) {
 	srand((unsigned int)time(NULL));
 	int typeOfDice = player[playerNum].getDice();

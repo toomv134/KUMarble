@@ -32,3 +32,4 @@ int cursorControl(int numberOfIndex);
 int updowncursorControl(int min, int max);
 int CursorMapChoice();
 bool ChoiceMap();
+int checkwhowin();
