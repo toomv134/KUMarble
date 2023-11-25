@@ -501,7 +501,7 @@ void miniGame(int playerNum, int typeOfGame) {// 리턴값이 이긴사람 playe
 			return;
 		}
 		EraseChoiceScene();
-		int tk = checkEQ(playerNum, n - 1); //5 -5
+		int tk = checkEQ(playerNum, n); //5 -5
 		player[playerNum].setCoin(tk);
 		player[n].setCoin(-tk);
 		miniGame(playerNum, 5);
