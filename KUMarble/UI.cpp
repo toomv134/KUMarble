@@ -253,7 +253,12 @@ void RenderAct(int map) {
 		cout << "앞으로 이동 타일 도착";
 		gotoxy(30, 7);
 		cout << "3칸 전진 !";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 	else if (map == 1) {
@@ -261,20 +266,35 @@ void RenderAct(int map) {
 		cout << "뒤로 이동 타일 도착";
 		gotoxy(30, 7);
 		cout << "3칸 후진 !";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 	else if (map == 2) {
 		gotoxy(26, 6);
 		cout << "상점 타일 출현";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 	}
 	else if (map == 3) {
 		gotoxy(23, 6);
 		cout << "미니게임 타일 도착";
 		gotoxy(26, 7);
 		cout << "가위바위보 시작";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 	else if (map == 4) {
@@ -282,7 +302,12 @@ void RenderAct(int map) {
 		cout << "미니게임 타일 도착";
 		gotoxy(26, 7);
 		cout << "업다운 시작";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 	else if (map == 5) {
@@ -290,7 +315,12 @@ void RenderAct(int map) {
 		cout << "미니게임 타일 도착";
 		gotoxy(26, 7);
 		cout << "홀짝 시작";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 	else if (map == 6) {
@@ -298,7 +328,12 @@ void RenderAct(int map) {
 		cout << "파란 타일 도착";
 		gotoxy(28, 7);
 		cout << "코인 3 획득!";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 	else if (map == 7) {
@@ -306,7 +341,12 @@ void RenderAct(int map) {
 		cout << "빨간 타일 도착";
 		gotoxy(28, 7);
 		cout << "코인 3 뺏김!";
-		Sleep(1000);
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
 		EraseChoiceScene();
 	}
 }
