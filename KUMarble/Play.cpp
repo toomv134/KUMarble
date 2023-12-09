@@ -355,12 +355,16 @@ void checkTile(int playerNum) {
 	if (map[pos] == 0) { //앞으로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(3);
-		checkTile(playerNum);
+		if (player[playerNum].getNowPosition() != 1) {
+			checkTile(playerNum);
+		}
 	}
 	else if (map[pos] == 1) { //뒤로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(-3);
-		checkTile(playerNum);
+		if (player[playerNum].getNowPosition() != 0) {
+			checkTile(playerNum);
+		}
 	}
 	else if (map[pos] == 2) { //상점
 		RenderAct(map[pos]);
