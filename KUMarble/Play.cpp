@@ -130,7 +130,7 @@ void play()
 
 bool checkWin(int playerNum) {
 
-	if (player[playerNum].getNowPosition() >= map.size()) {
+	if (player[playerNum].getNowPosition() >= (int)map.size()) {
 		system("cls");
 		gotoxy(26, 6);
 		cout<<"player "<<playerNum + 1<<" Win!! \n";
@@ -355,15 +355,29 @@ void checkTile(int playerNum) {
 	if (map[pos] == 0) { //앞으로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(3);
-		if (player[playerNum].getNowPosition() != 1) {//무한루프 안돌게
+		if (map[player[playerNum].getNowPosition()] != 1) {//무한루프 안돌게
 			checkTile(playerNum);
+		}
+		else {
+			RenderAct(map[player[playerNum].getNowPosition()]);
+			RenderNoLoop();
 		}
 	}
 	else if (map[pos] == 1) { //뒤로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(-3);
-		if (player[playerNum].getNowPosition() != 0) { //무한루프 안돌게
-			checkTile(playerNum);
+
+		if (player[playerNum].getNowPosition() == -1) {
+			RenderAct(-1);
+		}
+		else {
+			if (map[player[playerNum].getNowPosition()] != 0) {	//무한루프 안돌게
+				checkTile(playerNum);
+			}
+			else {
+				RenderAct(player[playerNum].getNowPosition());
+				RenderNoLoop();
+			}
 		}
 	}
 	else if (map[pos] == 2) { //상점

@@ -239,6 +239,19 @@ void RenderWhoseTurnTitle(int playerNum)
 	cout << "<Player " << playerNum + 1 << " Â÷·Ê>";
 }
 
+void RenderNoLoop() {
+	gotoxy(23, 6);
+	cout << "¹«ÇÑÈ÷ ¹Ýº¹µÇ¹Ç·Î";
+	gotoxy(23, 7);
+	cout << " ÀÌ Å¸ÀÏ¿¡¼­ ¸ØÃä´Ï´Ù.";
+	while (1) {
+		int input = 0;
+		input = _getch();
+		if (input == 13)	break;
+	}
+	EraseChoiceScene();
+}
+
 void RenderAct(int map) {
 	//0 ¾ÕÀ¸·Î 3Ä­
 	//1 µÚ·Î 3Ä­
@@ -248,7 +261,18 @@ void RenderAct(int map) {
 	//5 È¦Â¦
 	//6 ÄÚÀÎ ¾ò±â
 	//7 ÄÚÀÎ ÀÒ±â
-	if (map == 0) {
+	if (map == -1) {
+		gotoxy(23, 6);
+		cout << "½ÃÀÛÄ­À¸·Î ÀÌµ¿";
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
+		}
+		EraseChoiceScene();
+	}
+	else if (map == 0) {
 		gotoxy(23, 6);
 		cout << "¾ÕÀ¸·Î ÀÌµ¿ Å¸ÀÏ µµÂø";
 		gotoxy(30, 7);

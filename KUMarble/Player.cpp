@@ -37,7 +37,7 @@ int Player::getCoin()
 void Player::setNowPosition(int x)
 {
 	if ((nowPosition + x) < 0) {
-		nowPosition = 0;
+		nowPosition = -1;
 	}
 	else
 		nowPosition += x;
