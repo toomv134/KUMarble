@@ -355,14 +355,14 @@ void checkTile(int playerNum) {
 	if (map[pos] == 0) { //앞으로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(3);
-		if (player[playerNum].getNowPosition() != 1) {
+		if (player[playerNum].getNowPosition() != 1) {//무한루프 안돌게
 			checkTile(playerNum);
 		}
 	}
 	else if (map[pos] == 1) { //뒤로 3칸
 		RenderAct(map[pos]);
 		player[playerNum].setNowPosition(-3);
-		if (player[playerNum].getNowPosition() != 0) {
+		if (player[playerNum].getNowPosition() != 0) { //무한루프 안돌게
 			checkTile(playerNum);
 		}
 	}
