@@ -268,10 +268,6 @@ void RenderAct(int map) {
 	//5 홀짝
 	//6 코인 얻기
 	//7 코인 잃기
-	gotoxy(0,15);
-	cout << "        ";
-	gotoxy(0, 15);
-	cout << map;
 	if (map == -1) {
 		gotoxy(23, 6);
 		cout << "시작칸으로 이동";
@@ -386,11 +382,6 @@ void RenderAct(int map) {
 		}
 		EraseChoiceScene();
 	}
-
-	gotoxy(0, 16);
-	cout << "                        ";
-	gotoxy(0, 16);
-	cout << "renderact"<<map;
 }
 
 void EraseAct(int map) {
