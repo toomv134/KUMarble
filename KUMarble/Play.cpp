@@ -608,6 +608,12 @@ int checkUpDown(int playerNum, int otherNum) {
 	}
 	gotoxy(25, 8);
 	cout << "맞추지 못했습니다";
+	while (1) {
+		int input = 0;
+		input = _getch();
+		if (input == 13)	break;
+	}
+	EraseChoiceScene();
 	return -1;
 }
 

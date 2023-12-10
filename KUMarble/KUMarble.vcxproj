@@ -140,6 +140,7 @@
   <ItemGroup>
     <Text Include="55522.txt" />
     <Text Include="map.txt" />
+    <Text Include="updown.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
