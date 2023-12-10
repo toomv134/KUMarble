@@ -418,7 +418,7 @@ void checkTile(int playerNum) {
 }
 
 void checkShop(int playerNum) {
-	if (player[playerNum].getNowPosition() >= 26)return;
+	if (player[playerNum].getNowPosition() >= (int)map.size()) return;
 	if (player[playerNum].getNowPosition() > shop[0] && player[playerNum].getshopCnt() == 0) {
 		shopping(playerNum);
 	}
@@ -608,6 +608,12 @@ int checkUpDown(int playerNum, int otherNum) {
 	}
 	gotoxy(25, 8);
 	cout << "맞추지 못했습니다";
+	while (1) {
+		int input = 0;
+		input = _getch();
+		if (input == 13)	break;
+	}
+	EraseChoiceScene();
 	return -1;
 }
 
