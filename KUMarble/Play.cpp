@@ -36,8 +36,6 @@ void play()
 		maxturn = 0;
 		shop[0] = shop[1] = Max;
 		somebodywin = false;
-		map.clear();
-		mapName.clear();
 		system("cls");
 		printMiniFrame();
 		if (select(0, 0) == 2) {//게임 플레이,종료 결정
@@ -132,6 +130,8 @@ void play()
 				player.pop_back();
 			}
 		}
+		map.clear();
+		mapName.clear();
 	}
 
 }
@@ -380,6 +380,7 @@ void checkTile(int playerNum) {
 		}
 		else {
 			RenderAct(map[player[playerNum].getNowPosition()]);
+			player[playerNum].setNowPosition(-3);
 			RenderNoLoop();
 		}
 	}
@@ -396,13 +397,13 @@ void checkTile(int playerNum) {
 			}
 			else {
 				RenderAct(player[playerNum].getNowPosition());
+				player[playerNum].setNowPosition(3);
 				RenderNoLoop();
 			}
 		}
 	}
 	else if (map[pos] == 2) { //상점
-		RenderAct(map[pos]);
-		shopping(playerNum);
+		checkShop(playerNum);
 	}
 	else if (map[pos] == 6) {
 		RenderAct(map[pos]);
@@ -418,14 +419,20 @@ void checkTile(int playerNum) {
 }
 
 void checkShop(int playerNum) {
+
 	if (player[playerNum].getNowPosition() >= (int)map.size()) return;
-	if (player[playerNum].getNowPosition() > shop[0] && player[playerNum].getshopCnt() == 0) {
+
+	if (player[playerNum].getNowPosition() >= shop[0] && player[playerNum].getshopCnt() == 0) {
+		RenderAct(map[player[playerNum].getNowPosition()]);
+
 		shopping(playerNum);
 	}
-	else if (player[playerNum].getNowPosition() > shop[1] && player[playerNum].getshopCnt() == 1) {
+	else if (player[playerNum].getNowPosition() >= shop[1] && player[playerNum].getshopCnt() == 1) {
+		RenderAct(map[player[playerNum].getNowPosition()]);
 		shopping(playerNum);
 	}
-	else if (player[playerNum].getNowPosition() > shop[1] && player[playerNum].getshopCnt() == 0) {
+	else if (player[playerNum].getNowPosition() >= shop[1] && player[playerNum].getshopCnt() == 0) {
+		RenderAct(map[player[playerNum].getNowPosition()]);
 		shopping(playerNum);
 		shopping(playerNum);
 	}
