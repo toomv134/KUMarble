@@ -396,7 +396,7 @@ void checkTile(int playerNum) {
 				checkTile(playerNum);
 			}
 			else {
-				RenderAct(player[playerNum].getNowPosition());
+				RenderAct(map[player[playerNum].getNowPosition()]);
 				player[playerNum].setNowPosition(3);
 				RenderNoLoop();
 			}
