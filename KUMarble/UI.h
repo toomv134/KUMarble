@@ -36,3 +36,4 @@ void printMapChoiceFrame();
 void EraseChoiceMap();
 void RenderChoiceMap(vector<string> map, int n);
 void RenderNoLoop();
+void printTurn(int turn);

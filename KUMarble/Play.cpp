@@ -25,11 +25,15 @@ vector<string> mapName;
 int shop[2];
 bool somebodywin = false;
 int numberOfPlayer;
+int turn;
+int maxturn;
 
 void play()
 {
 
 	while (1) {
+		turn = 0;
+		maxturn = 0;
 		shop[0] = shop[1] = Max;
 		somebodywin = false;
 		map.clear();
@@ -41,6 +45,7 @@ void play()
 		}
 		//맵 결정 상점 2개이상이면 컷
 		if (ChoiceMap()) {
+			maxturn = map.size() / 2;
 			printFrame();
 			numberOfPlayer = select(0, 1);//플레이어 수 결정
 
@@ -50,6 +55,7 @@ void play()
 			}
 			system("cls");
 			printFrame();
+			printTurn(maxturn - turn);
 			RenderPlayersState(player,map.size()); //플레이어들 정보 갱신 
 			for (int i = 0; i < numberOfPlayer; i++) { // 각 플레이어들 주사위 선택
 				player[i].setDice(select(i, 2) - 1);
@@ -62,6 +68,7 @@ void play()
 
 			while (!somebodywin) { //누군가 이길때까지
 				int vod = 0; //value of dice
+				printTurn(maxturn - turn);
 				//게임씬나오고
 				// 얘네 플레이 하는 명수에 따라 포문 설정해주기
 				for (int i = 0; i < numberOfPlayer; i++) {
@@ -116,6 +123,7 @@ void play()
 						break; //마지막 타일 도착했는지 판별하고 다음 사람
 					}
 				}
+				turn++;
 
 			}
 			//cout<<"game over \n";
@@ -129,7 +137,6 @@ void play()
 }
 
 bool checkWin(int playerNum) {
-
 	if (player[playerNum].getNowPosition() >= (int)map.size()) {
 		system("cls");
 		gotoxy(26, 6);
@@ -143,21 +150,34 @@ bool checkWin(int playerNum) {
 		somebodywin = true;
 		return true;
 	}
-	if (map.size() > 50){
-		if (player[playerNum].getNowPosition() >= map.size() * 0.6) {
-			system("cls");
-			gotoxy(26, 6);
-			cout << "plaer " << checkwhowin() << "win!!";
-			//Sleep(1000);
-			while (1) {
-				int input = 0;
-				input = _getch();
-				if (input == 13)	break;
-			}
-			somebodywin = true;
-			return true;
+	if (turn >= maxturn) {
+		system("cls");
+		gotoxy(26, 6);
+		cout << "player " << checkwhowin() << "win!!";
+		//Sleep(1000);
+		while (1) {
+			int input = 0;
+			input = _getch();
+			if (input == 13)	break;
 		}
+		somebodywin = true;
+		return true;
 	}
+	//if (map.size() > 50){
+	//	if (player[playerNum].getNowPosition() >= map.size() * 0.6) {
+	//		system("cls");
+	//		gotoxy(26, 6);
+	//		cout << "plaer " << checkwhowin() << "win!!";
+	//		//Sleep(1000);
+	//		while (1) {
+	//			int input = 0;
+	//			input = _getch();
+	//			if (input == 13)	break;
+	//		}
+	//		somebodywin = true;
+	//		return true;
+	//	}
+	//}
 	return false;
 }
 

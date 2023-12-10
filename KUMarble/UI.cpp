@@ -26,6 +26,13 @@ void printFrame()
 	cout << "戌式式式式式式式式式式式式式式式式式式式式扛式式式式式式式式式式式式式式式式式式式式式式式式扛式式式式式式式式式式式式式式式式式式式式戎\n";
 }
 
+void printTurn(int turn) {
+	gotoxy(0, 14);
+	cout << "										";
+	gotoxy(0, 14);
+	cout << "			   陴擎 欐 : " << turn;
+}
+
 void renderCursor()
 {
 	cout << "９";
