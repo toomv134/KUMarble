@@ -28,7 +28,7 @@ void printFrame()
 
 void printTurn(int turn) {
 	gotoxy(0, 14);
-	cout << "										";
+	cout << "                                                                   ";
 	gotoxy(0, 14);
 	cout << "			   ³²Àº ÅÏ : " << turn;
 }
